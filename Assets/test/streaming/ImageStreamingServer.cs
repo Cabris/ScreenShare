@@ -137,7 +137,7 @@ namespace rtaNetworking.Streaming
 
             try
             {
-                Server = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                Server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
                 Server.Bind(new IPEndPoint(IPAddress.Any,(int)state));
                 Server.Listen(10);

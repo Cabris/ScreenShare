@@ -10,20 +10,29 @@ using rtaNetworking.Streaming;
 public class StreamServerTest : MonoBehaviour {
 	Texture2D tex ;
 	private ImageStreamingServer server;
-
-	byte iniByte;
-	float p=0.1f;
-	float c=0;
-	int w=64;
-	int h=64;
-	byte[] pngData;
+	Texture2D testTex;
+	int bufferSize=100000;
+	[SerializeField]
+	Renderer testRenderer;
+	int w=1024;
+	int h=512;
+	//byte[] pngData;
+	byte[] buffer;
+	byte[] jpgData;
 	void Start () {
+		if(w>Screen.width)
+			w=Screen.width;
+		if(h>Screen.height)
+			h=Screen.height;
 		Application.runInBackground=true;
 		tex=new Texture2D(w,h,TextureFormat.RGB24,false);
 		server = new ImageStreamingServer();
 		server.ClientWork += send;
-		//server.Interval = 100;
+		server.Interval = 33;
 		server.Start();
+
+		testTex=new Texture2D(w,h,TextureFormat.RGB24,false);
+		testRenderer.material.mainTexture=testTex;
 	}
 	
 	void OnApplicationQuit() {
@@ -31,42 +40,34 @@ public class StreamServerTest : MonoBehaviour {
 	}
 
 	string dataStr="XXX";
+	bool isReadPixel=true;
 	void OnPostRender ()
 	{
+		isReadPixel=true;
 		tex.ReadPixels (new Rect (0, 0, w, h), 0, 0, false);
-		pngData = tex.EncodeToPNG ();
-//		if (c >= p) {
-//			if (server.Clients.Count>0) {
-//
-//			}
-//
-//			c = 0;
-//		}
-//		else
-//			c += Time.deltaTime;
-		
+		//pngData = tex.EncodeToPNG ();
+		JPGEncoder jpgEncoder=new JPGEncoder(tex.GetPixels(),tex.width,tex.height,80);
+		jpgEncoder.doEncoding();
+		jpgData=jpgEncoder.GetBytes();
+		Debug.Log(jpgData.Length);
+		testTex.LoadImage(jpgData);
+		isReadPixel=false;
 	}
-	
-	void send_1(Socket client){
 
-		byte[] byteArray = System.Text.Encoding.Default.GetBytes ( dataStr );
-//		for (int i = 0; i < bufferSize; i++) {
-//			if(i<byteArray.Length)
-//				buffer [i] = byteArray [i];
-//		}
-
-		//buffer [bufferSize - 1] = 16;
-		//if(client.Connected)
-		client.Send(byteArray,byteArray.Length, SocketFlags.None);
-		Debug.Log ("send");
-
-	}
 
 	void send (Socket client)
 	{
-		if (pngData == null)
+		client.ReceiveBufferSize =bufferSize;
+		if (jpgData == null&&!isReadPixel)
 			return;
-		client.Send(pngData,pngData.Length, SocketFlags.None);
+		buffer=new byte[bufferSize];
+		for (int i = 0; i < jpgData.Length; i++) {
+			buffer [i] = jpgData [i];
+		}
+		client.Send(buffer,buffer.Length, SocketFlags.None);
+		length=jpgData.Length;
+
+		//client.Send(buffer,buffer.Length, SocketFlags.None);
 		Debug.Log ("send");
 	}
 	

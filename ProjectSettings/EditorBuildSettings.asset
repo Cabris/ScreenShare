@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/test/and.unity
   - enabled: 0
     path: Assets/test/pc.unity
-  - enabled: 0
-    path: Assets/test/streamClientTest.unity
   - enabled: 1
+    path: Assets/test/streamClientTest.unity
+  - enabled: 0
     path: Assets/test/streamServerTest.unity

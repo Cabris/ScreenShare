@@ -10,21 +10,20 @@ public class StreamClientTest : MonoBehaviour {
 	Texture2D tex;
 	
 	Socket client;
-	static int bufferSize=50000;
-	byte[] buffer=new byte[bufferSize];
+	int bufferSize=100000;
+	byte[] buffer;
 	string ipAddress="127.0.0.1";
-	
-	float p=0.03f;
-	float c=0;
-	
+
+	int Interval=33;
 	Thread _Thread;
 	
 	void Start () {
-		// Create a texture in DXT1 format
+		buffer=new byte[bufferSize];
 		Application.runInBackground=true;
 		tex=new Texture2D(4, 4, TextureFormat.RGB24, false);
 		renderer.material.mainTexture = tex;
-		client = new Socket(AddressFamily.InterNetwork,SocketType.Dgram, ProtocolType.Udp);
+		client = new Socket(AddressFamily.InterNetwork,SocketType.Stream, ProtocolType.Tcp);
+		client.ReceiveBufferSize =bufferSize;
 		//ipAddress="10.120.168.114";
 		_Thread = new Thread(new ThreadStart(receive));
 		_Thread.IsBackground = true;
@@ -33,14 +32,8 @@ public class StreamClientTest : MonoBehaviour {
 	int length;
 	// Update is called once per frame
 	void Update () {
-		
-		if (c >= p) {
-			tex.LoadImage (buffer);
-			c = 0;
-		}
-		else
-			c += Time.deltaTime;
-		
+			if(!isReadData)
+				tex.LoadImage (buffer);
 	}
 	
 	void OnApplicationQuit() {
@@ -51,40 +44,27 @@ public class StreamClientTest : MonoBehaviour {
 		}
 	}
 	bool isRunning=false;
-	void receive_1 ()
-	{
-		
-		Debug.Log ("start receive: "+client.Connected);
-		isRunning = true;
-		while (client.Connected&&isRunning) {
-			Debug.Log("receiveing");
-			buffer = new byte[bufferSize];
-			client.Receive (buffer, bufferSize, SocketFlags.None);
-			Debug.Log("received");
-			
-			dataStr = System.Text.Encoding.Default.GetString (buffer);
-			string b64str = Convert.ToBase64String (buffer);
-			Debug.Log ("str:" + dataStr );
-			Debug.Log("length:" + length + ", dataStr.Length:" + dataStr.Length);
-			Debug.Log ("b64:" + b64str);
-		}
-	}
-	
+	bool isReadData=true;
+
 	void receive ()
 	{
 		Debug.Log ("start receive: "+client.Connected);
 		isRunning = true;
 		while (client.Connected&&isRunning) {
+			isReadData=true;
 			Debug.Log("receiveing");
 			buffer = new byte[bufferSize];
 			client.Receive (buffer, bufferSize, SocketFlags.None);
 			Debug.Log("received");
-			
-			dataStr = System.Text.Encoding.Default.GetString (buffer);
+
+			//dataStr = System.Text.Encoding.Default.GetString (buffer);
 			string b64str = Convert.ToBase64String (buffer);
-			Debug.Log ("str:" + dataStr );
-			Debug.Log("length:" + length + ", dataStr.Length:" + dataStr.Length);
+			//Debug.Log ("str:" + dataStr );
+			length=client.Available;
+			Debug.Log("length:" + length + ", dataStr.Length:" + b64str.Length);
 			Debug.Log ("b64:" + b64str);
+			isReadData=false;
+			Thread.Sleep(Interval);
 		}
 	}
 	
@@ -93,8 +73,7 @@ public class StreamClientTest : MonoBehaviour {
 		IPAddress IP = IPAddress.Parse(ipAddress);
 		IPEndPoint IPE = new IPEndPoint(IP, 8080);
 		client.Connect(IPE);
-		
-		
+
 		_Thread.Start();
 		
 	}
@@ -111,7 +90,7 @@ public class StreamClientTest : MonoBehaviour {
 		if(GUILayout.Button("Connect",myStyle)) {
 			connect ();
 		}
-		GUILayout.Label(dataStr,myStyle);
+		//GUILayout.Label(dataStr,myStyle);
 		GUILayout.EndVertical();
 	}
 }
