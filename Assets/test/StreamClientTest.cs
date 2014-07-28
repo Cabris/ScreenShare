@@ -1,75 +1,108 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Net.Sockets;
+using System.Net;
 using System;
+using System.Threading;
+
 public class StreamClientTest : MonoBehaviour {
 	GUIStyle myStyle;
 	Texture2D tex;
-	TcpClient tcpClient;
-	NetworkStream netStream;
-	static int bufferSize=StreamServerTest.bufferSize;
+	
+	Socket client;
+	static int bufferSize=50000;
 	byte[] buffer=new byte[bufferSize];
 	string ipAddress="127.0.0.1";
-
+	
 	float p=0.03f;
 	float c=0;
-
+	
+	Thread _Thread;
+	
 	void Start () {
 		// Create a texture in DXT1 format
 		Application.runInBackground=true;
 		tex=new Texture2D(4, 4, TextureFormat.RGB24, false);
 		renderer.material.mainTexture = tex;
-		tcpClient = new TcpClient ();
-		ipAddress="192.168.1.48";
+		client = new Socket(AddressFamily.InterNetwork,SocketType.Dgram, ProtocolType.Udp);
+		//ipAddress="10.120.168.114";
+		_Thread = new Thread(new ThreadStart(receive));
+		_Thread.IsBackground = true;
 	}
 	string dataStr="XXX";
 	int length;
 	// Update is called once per frame
 	void Update () {
-
+		
 		if (c >= p) {
-			if (tcpClient.Connected&&netStream.CanRead)
-			{
-				//receive ();
-				byte[] lengthData=new byte[4];
-				netStream.Read(lengthData,0,4);
-				netStream.Read(buffer,0,bufferSize);
-				length=BitConverter.ToInt32(lengthData,0);
-				byte[] data=new byte[length];
-				for(int i=0;i<length;i++){
-					data[i]=buffer[i];
-				}
-
-				dataStr = System.Text.Encoding.Default.GetString ( data );
-
-				if(length==0){
-					throw new Exception();
-				}
-				Debug.Log(dataStr.GetType());
-			}
+			tex.LoadImage (buffer);
 			c = 0;
 		}
 		else
 			c += Time.deltaTime;
-
+		
 	}
-
+	
+	void OnApplicationQuit() {
+		isRunning = false;
+		if (_Thread.IsAlive) {
+			_Thread.Join ();
+			_Thread.Abort ();
+		}
+	}
+	bool isRunning=false;
+	void receive_1 ()
+	{
+		
+		Debug.Log ("start receive: "+client.Connected);
+		isRunning = true;
+		while (client.Connected&&isRunning) {
+			Debug.Log("receiveing");
+			buffer = new byte[bufferSize];
+			client.Receive (buffer, bufferSize, SocketFlags.None);
+			Debug.Log("received");
+			
+			dataStr = System.Text.Encoding.Default.GetString (buffer);
+			string b64str = Convert.ToBase64String (buffer);
+			Debug.Log ("str:" + dataStr );
+			Debug.Log("length:" + length + ", dataStr.Length:" + dataStr.Length);
+			Debug.Log ("b64:" + b64str);
+		}
+	}
+	
 	void receive ()
 	{
-		netStream.Read (buffer, 0, bufferSize);
-		tex.LoadImage (buffer);
+		Debug.Log ("start receive: "+client.Connected);
+		isRunning = true;
+		while (client.Connected&&isRunning) {
+			Debug.Log("receiveing");
+			buffer = new byte[bufferSize];
+			client.Receive (buffer, bufferSize, SocketFlags.None);
+			Debug.Log("received");
+			
+			dataStr = System.Text.Encoding.Default.GetString (buffer);
+			string b64str = Convert.ToBase64String (buffer);
+			Debug.Log ("str:" + dataStr );
+			Debug.Log("length:" + length + ", dataStr.Length:" + dataStr.Length);
+			Debug.Log ("b64:" + b64str);
+		}
 	}
-
+	
 	void connect ()
 	{
-		tcpClient.Connect (ipAddress, 8080);
-		netStream = tcpClient.GetStream ();
+		IPAddress IP = IPAddress.Parse(ipAddress);
+		IPEndPoint IPE = new IPEndPoint(IP, 8080);
+		client.Connect(IPE);
+		
+		
+		_Thread.Start();
+		
 	}
-
+	
 	void OnGUI() {
-
+		
 		GUI.Label(new Rect(50,Screen.height-50,800,50),length+"");
-
+		
 		myStyle = new GUIStyle(GUI.skin.button);
 		myStyle.fontSize = 50;
 		GUILayout.BeginVertical(myStyle);

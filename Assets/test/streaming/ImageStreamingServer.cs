@@ -25,7 +25,7 @@ namespace rtaNetworking.Streaming
     public class ImageStreamingServer:IDisposable
     {
 
-        private List<Socket> _Clients;
+        public List<Socket> _Clients;
         private static Thread _Thread;
 
         public ImageStreamingServer()//:this(Screen.Snapshots(600,450,true))
@@ -57,7 +57,7 @@ namespace rtaNetworking.Streaming
         /// <summary>
         /// Gets a collection of client sockets.
         /// </summary>
-        public IEnumerable<Socket> Clients { get { return _Clients; } }
+		public IList<Socket> Clients { get { return _Clients; } }
 
         /// <summary>
         /// Returns the status of the server. True means the server is currently 
@@ -137,7 +137,7 @@ namespace rtaNetworking.Streaming
 
             try
             {
-                Server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                Server = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
                 Server.Bind(new IPEndPoint(IPAddress.Any,(int)state));
                 Server.Listen(10);
@@ -146,11 +146,7 @@ namespace rtaNetworking.Streaming
                 
                 foreach (Socket client in Server.IncommingConnectoins())
                     ThreadPool.QueueUserWorkItem(new WaitCallback(ClientThread), client);
-//				SocketAsyncEventArgs e = new SocketAsyncEventArgs();
-//				e.Completed+=AcceptCallback;
-//				Server.AcceptAsync(e);
-//				Debug.Log("AcceptAsync");
-            
+				            
             }
             catch { }
 
@@ -162,8 +158,7 @@ namespace rtaNetworking.Streaming
 			ThreadPool.QueueUserWorkItem(new WaitCallback(ClientThread), client);
 		}
 
-		public NetworkStream netStream;
-
+		public NetworkStream NetStream{ get; private set;}
         /// <summary>
         /// Each client connection will be served by this thread.
         /// </summary>
@@ -180,17 +175,25 @@ namespace rtaNetworking.Streaming
 
             try
             {
-				netStream=new NetworkStream(socket, true);
-
+				//NetStream=new NetworkStream(socket, true);
+				Debug.Log ("start send");
+				while(ClientWork!=null){
+					ClientWork(socket);
+					Thread.Sleep(Interval);
+				}
             }
             catch { }
             finally
             {
-                lock (_Clients)
-                    _Clients.Remove(socket);
+                lock (_Clients){
+					_Clients.Remove(socket);
+					Debug.Log("client removed");
+				}
             }
         }
 
+		public delegate void ClientThreadWork(Socket client);
+		public ClientThreadWork ClientWork;
 
         #region IDisposable Members
 
