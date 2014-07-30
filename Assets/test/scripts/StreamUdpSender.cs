@@ -4,10 +4,6 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 public class StreamUdpSender : MonoBehaviour {
-	
-	Texture2D tex,testTex ;
-	[SerializeField]
-	Renderer testRenderer;
 	[SerializeField]
 	float jpgQuality=80;
 	UdpSocketSender sender;
@@ -18,16 +14,13 @@ public class StreamUdpSender : MonoBehaviour {
 	int widthDiv;
 	[SerializeField]
 	int heightDiv;
-	//byte[] jpgData;
-	
-	
+
+	Texture2D tex;
 	// Use this for initialization
 	void Start () {
 		Application.runInBackground=true;
 		packageDatas=new List<byte[]>();
-		tex=new Texture2D(Screen.width,Screen.height,TextureFormat.RGB24,false);
-		testTex=new Texture2D(NetworkPackage.Width,NetworkPackage.Height,TextureFormat.RGB24,false);
-		testRenderer.material.mainTexture=testTex;
+		tex=new Texture2D(Screen.width,Screen.height);
 		sender=new UdpSocketSender("127.0.0.1", 8001);
 		//sender.Ip="192.168.1.34";
 		sender.PackageBuffer=NetworkPackage.Size;
@@ -51,6 +44,7 @@ public class StreamUdpSender : MonoBehaviour {
 		packageDatas.Clear();
 		int w=NetworkPackage.Width;
 		int h=NetworkPackage.Height;
+
 		tex.ReadPixels (new Rect (0, 0, Screen.width,Screen.height), 0, 0, false);
 		for(int i=0;i<heightDiv;i++)
 		for(int j=0;j<widthDiv;j++){
