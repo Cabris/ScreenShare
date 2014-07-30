@@ -11,11 +11,11 @@ using System;
 
 public class NetworkPackage
 {
-	public static int Width{get{return 256;}}
+	public static int Width{get{return 160;}}
 
-	public static int Height{get{return 256;}}
+	public static int Height{get{return 160;}}
 
-	public static int Size{get{return 40000;}}
+	public static int Size{get{return 15000;}}
 
 }
 

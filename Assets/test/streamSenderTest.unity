@@ -4499,6 +4499,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testRenderer: {fileID: 792803674}
   jpgQuality: 80
+  widthDiv: 0
+  heightDiv: 0
 --- !u!1 &1995523518
 GameObject:
   m_ObjectHideFlags: 0
