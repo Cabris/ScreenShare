@@ -4,13 +4,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-
+using System.Threading;
 public class UdpSocketHoster 
 {
 	#region Fields (3) 
 	
 	private int mRecieverBuffer = 2048;
 	private Socket mSocket;
+	bool isLinstening=false;
+	Thread receiveThread;
 	
 	#endregion Fields 
 	
@@ -53,47 +55,56 @@ public class UdpSocketHoster
 	{
 		this.Ip = ip;
 		this.Port = port;
-
+		Application.runInBackground=true;
 		//Setting Endpoint
+
 		IPEndPoint endpoint = new IPEndPoint(IPAddress.Any, Port);
 		mSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-		Application.runInBackground=true;
 		//Binding Endpoint
 		mSocket.Bind(endpoint);
+		receiveThread=new Thread(new ThreadStart(Listen));
 	}
 	
 	public void Stop()
 	{
 		mSocket.Close();
+		isLinstening=false;
+		receiveThread.Join();
+		receiveThread.Abort();
 	}
 	// Private Methods (1) 
 	
-	public void Listen()
+	public void Start(){
+		isLinstening=true;
+		receiveThread.Start();
+	}
+	
+	
+	private void Listen()
 	{            
-
 		//Getting Client Ip
 		IPEndPoint clientEndpoint = new IPEndPoint(IPAddress.Any, Port);
 		EndPoint Remote = (EndPoint)(clientEndpoint);                       
-
-		try
-		{
-			int recv=0;
-			byte[] receivePackage = new byte[mRecieverBuffer];
-			
-			//Receive data from client
-			recv = mSocket.ReceiveFrom(receivePackage, ref Remote);
-			
-			//Deserialize data
-			
-			if (RecievedData != null&&recv>0)
+		while(isLinstening){
+			try
 			{
-				RecievedData(receivePackage);
-			}                    
-		}
-		catch (Exception ex)
-		{
-			Debug.LogException(ex);
-			throw;
+				int recv=0;
+				byte[] receivePackage = new byte[mRecieverBuffer];
+				
+				//Receive data from client
+				recv = mSocket.ReceiveFrom(receivePackage, ref Remote);
+
+				if (RecievedData != null&&recv>0)
+				{
+					RecievedData(receivePackage);
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.LogException(ex);
+				throw;
+			}
+			//Thread.Sleep(5);
 		}
 		
 	}

@@ -89,7 +89,6 @@ public class BitmapData
 
 		if ( y < 0 )
 			y = 0;
-
 		return pixels[y * width + x];
 	}
 }
@@ -687,9 +686,12 @@ public class JPGEncoder
 			for ( int x=0; x < 8; x++ )
 			{
 				Color C = img.getPixelColor(xpos + x, img.height - (ypos + y));
-				float R = C.r * 255.0f;
-				float G = C.g * 255.0f;
-				float B = C.b * 255.0f;
+//				float R = C.r * 255.0f;
+//				float G = C.g * 255.0f;
+//				float B = C.b * 255.0f;
+				float R = C.grayscale * 255.0f;
+				float G = C.grayscale * 255.0f;
+				float B = C.grayscale * 255.0f;
 				YDU[pos] = (((0.29900f) * R + (0.58700f) * G + (0.11400f) * B)) - 128.0f;
 				UDU[pos] = (((-0.16874f) * R + (-0.33126f) * G + (0.50000f) * B));
 				VDU[pos] = (((0.50000f) * R + (-0.41869f) * G + (-0.08131f) * B));
@@ -728,6 +730,34 @@ public class JPGEncoder
 			sf = (int)(5000.0f / quality);
 		else
 			sf = (int)(200.0f - quality * 2.0f);
+
+//		initHuffmanTbl();
+//		initCategoryfloat();
+//		initQuantTables(sf);
+
+	}
+
+	public JPGEncoder(float quality)
+	{
+		if ( quality <= 0.0f )
+			quality = 1.0f;
+		
+		if ( quality > 100.0f )
+			quality = 100.0f;
+		
+		if ( quality < 50.0f )
+			sf = (int)(5000.0f / quality);
+		else
+			sf = (int)(200.0f - quality * 2.0f);
+		
+		initHuffmanTbl();
+		initCategoryfloat();
+		initQuantTables(sf);
+		
+	}
+
+	public void setImage(Color[] pixels, int width, int height){
+		image = new BitmapData(pixels, width, height);
 	}
 
 	/**
@@ -738,9 +768,9 @@ public class JPGEncoder
 		isDone = false;
 
 		// Create tables -- technically we could only do this once for multiple encodes
-		initHuffmanTbl();
-		initCategoryfloat();
-		initQuantTables(sf);
+//		initHuffmanTbl();
+//		initCategoryfloat();
+//		initQuantTables(sf);
 
 		// Do actual encoding
 		encode();

@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/test/streamHosterTest.unity
   - enabled: 0
     path: Assets/test/streamSenderTest.unity
+  - enabled: 0
+    path: Assets/test/newTest.unity
