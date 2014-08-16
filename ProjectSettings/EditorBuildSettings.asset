@@ -9,9 +9,11 @@ EditorBuildSettings:
     path: Assets/test/and.unity
   - enabled: 0
     path: Assets/test/pc.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/test/streamHosterTest.unity
   - enabled: 0
     path: Assets/test/streamSenderTest.unity
   - enabled: 0
     path: Assets/test/newTest.unity
+  - enabled: 1
+    path: Assets/test/H264EncoderTest.unity

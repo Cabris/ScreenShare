@@ -1,0 +1,4 @@
+INDEX VERSION 1.126+C:\Users\Cabris\Documents\GitHub\ScreenShare\hoster\.metadata\.plugins\org.eclipse.jdt.core
+148743938.index
+2626230084.index
+961686533.index

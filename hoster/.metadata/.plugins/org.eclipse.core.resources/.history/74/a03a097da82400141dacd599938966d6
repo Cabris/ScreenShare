@@ -1,0 +1,23 @@
+package com.myapp.h264streamingviwer;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+public class MainActivity extends Activity {
+
+	Decoder decoder;
+	StreamReceiver receiver;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		decoder = new Decoder(this);
+		receiver=new StreamReceiver();
+		// decoder.onCreate(savedInstanceState);
+	}
+
+	protected void onDestroy() {
+		super.onDestroy();
+	}
+
+}

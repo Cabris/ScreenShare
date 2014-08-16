@@ -33,7 +33,7 @@ public class StreamUdpSender : MonoBehaviour
 		packageDatas = new List<byte[]> ();
 		tex = new Texture2D (scrW, scrH);
 		sender = new UdpSocketSender ("127.0.0.1", 8081);
-		//sender.Ip="192.168.0.198";
+		sender.Ip="192.168.1.34";
 		sender.PackageBuffer = NetworkPackage.Size;
 		widthDiv = scrW / NetworkPackage.Width;
 		heightDiv = scrH / NetworkPackage.Height;

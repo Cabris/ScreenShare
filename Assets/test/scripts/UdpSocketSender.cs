@@ -51,7 +51,7 @@ public class UdpSocketSender
 	{
 		//Setting Server Endpoint
 		IPEndPoint endPoint = new IPEndPoint(IPAddress.Broadcast, Port);
-		
+		endPoint = new IPEndPoint(IPAddress.Parse(Ip), Port);
 		byte[] package = new byte[mPackageBuffer];
 		for(int i =0;i<data.Length;i++){
 			package[i]=data[i];

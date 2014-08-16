@@ -1,0 +1,20 @@
+package com.myapp.h264streamingviwer;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import android.media.MediaCodec;
+import android.media.MediaCodec.BufferInfo;
+import android.media.MediaExtractor;
+import android.media.MediaFormat;
+import android.util.Log;
+import android.view.Surface;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+
+
+public class Decoder {
+
+}
