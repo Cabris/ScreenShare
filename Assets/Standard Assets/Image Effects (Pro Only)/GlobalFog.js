@@ -3,7 +3,7 @@
 
 @script ExecuteInEditMode
 @script RequireComponent (Camera)
-@script AddComponentMenu ("Image Effects/Rendering/Global Fog")
+@script AddComponentMenu ("Image Effects/Global Fog")
 
 class GlobalFog extends PostEffectsBase {
 	

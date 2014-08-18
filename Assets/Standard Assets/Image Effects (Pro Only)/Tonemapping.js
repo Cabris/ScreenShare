@@ -3,7 +3,7 @@
 
 @script ExecuteInEditMode
 @script RequireComponent (Camera)
-@script AddComponentMenu ("Image Effects/Color Adjustments/Tonemapping")
+@script AddComponentMenu ("Image Effects/Tonemapping")
 
 class Tonemapping extends PostEffectsBase {
 	
@@ -106,7 +106,7 @@ class Tonemapping extends PostEffectsBase {
 		return true;
 	}
 		
-	// attribute indicates that the image filter chain will continue in LDR
+	// a new attribute we introduced in 3.5 indicating that the image filter chain will continue in LDR
 	@ImageEffectTransformsToLDR	
 	function OnRenderImage (source : RenderTexture, destination : RenderTexture) {		
 		if (CheckResources() == false) {
@@ -204,8 +204,6 @@ class Tonemapping extends PostEffectsBase {
 		adaptionSpeed = adaptionSpeed < 0.001f ? 0.001f : adaptionSpeed;	
 		tonemapMaterial.SetFloat ("_AdaptionSpeed", adaptionSpeed);
 
-		rt.MarkRestoreExpected(); // keeping luminance values between frames, RT restore expected
-		
 		#if UNITY_EDITOR
 			if(Application.isPlaying && !freshlyBrewedInternalRt)
 				Graphics.Blit (lumRt, rt, tonemapMaterial, 2); 

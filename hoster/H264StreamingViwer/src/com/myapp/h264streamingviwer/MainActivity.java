@@ -7,14 +7,19 @@ public class MainActivity extends Activity {
 
 	Decoder decoder;
 	StreamReceiver receiver;
-
+FileReceiver fileReceiver;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		decoder = new Decoder(this);
+		
 		receiver=new StreamReceiver("192.168.1.48",8888);
 		receiver.Connect();
-		//decoder.onCreate(savedInstanceState);
+//		fileReceiver=new FileReceiver("storage/sdcard1/" + "MyTest_h264.mp4");
+//		fileReceiver.start();
+		
+		decoder = new Decoder(this,receiver);
+		decoder.onCreate(savedInstanceState);
 	}
 
 	protected void onDestroy() {

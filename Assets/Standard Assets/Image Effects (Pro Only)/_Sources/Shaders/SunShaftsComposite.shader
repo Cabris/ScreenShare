@@ -160,6 +160,7 @@ Shader "Hidden/SunShaftsComposite" {
 Subshader {
   
  Pass {
+ 	  Blend Off
 	  ZTest Always Cull Off ZWrite Off
 	  Fog { Mode off }      
 
@@ -173,6 +174,7 @@ Subshader {
   }
   
  Pass {
+	  Blend One Zero
 	  ZTest Always Cull Off ZWrite Off
 	  Fog { Mode off }      
 
@@ -186,6 +188,7 @@ Subshader {
   }
   
   Pass {
+ 	  Blend Off  	
 	  ZTest Always Cull Off ZWrite Off
 	  Fog { Mode off }      
 
@@ -199,6 +202,7 @@ Subshader {
   }
   
   Pass {
+ 	  Blend Off
 	  ZTest Always Cull Off ZWrite Off
 	  Fog { Mode off }      
 
@@ -212,6 +216,7 @@ Subshader {
   } 
   
   Pass {
+ 	  Blend Off
 	  ZTest Always Cull Off ZWrite Off
 	  Fog { Mode off }      
 

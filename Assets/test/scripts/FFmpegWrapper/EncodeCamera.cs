@@ -8,7 +8,8 @@ public class EncodeCamera : MonoBehaviour {
 	CameraSource source;
 	[SerializeField]
 	int outWidth,outHeight,fps;
-
+	[SerializeField]
+	int bitRate;
 	StreamTcpServer server;
 
 	ASCIIEncoding ascEncoder = new ASCIIEncoding();
@@ -18,6 +19,7 @@ public class EncodeCamera : MonoBehaviour {
 		encoder.OutWidth=outWidth;
 		encoder.OutHeight=outHeight;
 		encoder.Fps=fps;
+		encoder.BitRate=bitRate;
 		encoder.Prepare();
 		server=GetComponent<StreamTcpServer>();
 	}
@@ -47,7 +49,7 @@ public class EncodeCamera : MonoBehaviour {
 		if(isEncoding){
 		byte[] encoded= encoder.Encoding();
 		server.Send(encoded);
-		//Debug.Log(encoded.Length);
+		Debug.Log(encoded.Length);
 		tatol+=encoded.Length;
 		}
 	}

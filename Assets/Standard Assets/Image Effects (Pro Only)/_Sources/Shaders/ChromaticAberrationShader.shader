@@ -18,7 +18,6 @@ Shader "Hidden/ChromaticAberration" {
 	half _ChromaticAberration;
 	half _AxialAberration;
 	half _Luminance;
-	half2 _BlurDistance;
 		
 	v2f vert( appdata_img v ) 
 	{
@@ -79,12 +78,12 @@ Shader "Hidden/ChromaticAberration" {
 		half2 uv = i.uv;
 		
 		// corner heuristic
-		coords = (coords - 0.5h) * 2.0h;		
+		coords = (coords - 0.5) * 2.0;		
 		half coordDot = dot (coords,coords);
 
 		half4 color = tex2D (_MainTex, uv);
 		half tangentialStrength = _ChromaticAberration * coordDot * coordDot;
-		half maxOfs = clamp(max(_AxialAberration, tangentialStrength), _BlurDistance.x, _BlurDistance.y);
+		half maxOfs = clamp(max(_AxialAberration, tangentialStrength), -2.5h, 2.5h);
 
 		// we need a blurred sample tap for advanced aberration
 
@@ -92,7 +91,7 @@ Shader "Hidden/ChromaticAberration" {
 		// and if you do have a proper HDR setup, lerping .rb might yield better results than .g
 		// (see below)
 
-		half4 blurredTap = color * 0.1h;
+		half4 blurredTap = color * 0.2h;
 		for(int l=0; l < SmallDiscKernelSamples; l++)
 		{
 			half2 sampleUV = uv + SmallDiscKernel[l].xy * _MainTex_TexelSize.xy * maxOfs;
@@ -104,13 +103,12 @@ Shader "Hidden/ChromaticAberration" {
 		// debug:
 		//return blurredTap;
 
-		half lumDiff = Luminance(abs(blurredTap.rgb-color.rgb));
-		half isEdge = saturate(_Luminance * lumDiff);
+		half isEdge = saturate(_Luminance * abs(Luminance(blurredTap.rgb)-Luminance(color.rgb)));
 		
 		// debug #2:
 		//return isEdge;
 
-		color.rb = lerp(color.rb, blurredTap.rb, isEdge);
+		color.g = lerp(color.g, blurredTap.g, saturate(isEdge));
 		
 		return color;
 	}

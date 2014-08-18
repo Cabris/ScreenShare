@@ -1,0 +1,13 @@
+package com.myapp.h264streamingviwer;
+
+import java.util.concurrent.ConcurrentLinkedQueue;
+
+public abstract class IStreamSource {
+
+	protected ConcurrentLinkedQueue<byte[]> queue;
+	
+	public ConcurrentLinkedQueue<byte[]> getQueue() {
+		return queue;
+	}
+	
+}

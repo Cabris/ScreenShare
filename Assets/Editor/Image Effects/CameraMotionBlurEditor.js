@@ -10,7 +10,6 @@ class CameraMotionBlurEditor extends Editor
   var preview : SerializedProperty;
   var previewScale : SerializedProperty;
   var movementScale : SerializedProperty;
-  var jitter : SerializedProperty;
   var rotationScale : SerializedProperty;
   var maxVelocity : SerializedProperty;
   var minVelocity : SerializedProperty;
@@ -38,7 +37,6 @@ class CameraMotionBlurEditor extends Editor
     minVelocity = serObj.FindProperty ("minVelocity");
 
     maxNumSamples = serObj.FindProperty ("maxNumSamples");
-    jitter = serObj.FindProperty ("jitter");
 
     excludeLayers = serObj.FindProperty ("excludeLayers");
     //dynamicLayers = serObj.FindProperty ("dynamicLayers");
@@ -81,9 +79,10 @@ class CameraMotionBlurEditor extends Editor
       EditorGUILayout.PropertyField (excludeLayers, new GUIContent(" Exclude Layers"));
       EditorGUILayout.PropertyField (velocityDownsample, new GUIContent(" Velocity Downsample"));
       velocityDownsample.intValue = velocityDownsample.intValue < 1 ? 1 : velocityDownsample.intValue;
-      if(filterType.enumValueIndex >= 2) { // only display jitter for reconstruction
+      if(filterType.enumValueIndex >= 2) // only display jitter for reconstruction
         EditorGUILayout.PropertyField (noiseTexture, new GUIContent(" Sample Jitter"));
-        EditorGUILayout.PropertyField (jitter, new GUIContent("  Jitter Strength"));
+      if(filterType.enumValueIndex > 2) { // DX11
+          maxNumSamples.intValue = EditorGUILayout.IntSlider (" Max Sample Count", maxNumSamples.intValue, 6, 32);
       }
     }
 
@@ -91,7 +90,7 @@ class CameraMotionBlurEditor extends Editor
 
     EditorGUILayout.PropertyField (preview, new GUIContent("Preview"));
     if (preview.boolValue)
-      EditorGUILayout.PropertyField (previewScale, new GUIContent(""));    
+      EditorGUILayout.PropertyField (previewScale, new GUIContent(" Preview Scale"));    
         	
     serObj.ApplyModifiedProperties();
     }

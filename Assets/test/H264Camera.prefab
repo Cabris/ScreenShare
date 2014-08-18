@@ -90,7 +90,8 @@ MonoBehaviour:
   source: {fileID: 11400002}
   outWidth: 800
   outHeight: 480
-  fps: 25
+  fps: 30
+  bitRate: 800000
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

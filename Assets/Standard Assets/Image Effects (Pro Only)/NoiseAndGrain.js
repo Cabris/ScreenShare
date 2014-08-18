@@ -3,7 +3,7 @@
 
 @script ExecuteInEditMode
 @script RequireComponent (Camera)
-@script AddComponentMenu ("Image Effects/Noise/Noise And Grain (Filmic)")
+@script AddComponentMenu ("Image Effects/Noise And Grain (Overlay, DX11)")
 
 class NoiseAndGrain extends PostEffectsBase {
 

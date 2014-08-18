@@ -3,7 +3,7 @@
 
 @script ExecuteInEditMode
 @script RequireComponent (Camera)
-@script AddComponentMenu ("Image Effects/Other/Antialiasing")
+@script AddComponentMenu ("Image Effects/Antialiasing (Fullscreen)")
 
 enum AAMode {
 	FXAA2 = 0,

@@ -1,0 +1,12 @@
+package com.myapp.h264streamingviwer;
+
+import android.R.string;
+
+public class FileReceiver extends StreamSource {
+	private static String SAMPLE = "storage/sdcard1/" + "v2.mp4";
+	
+	public FileReceiver(string sample) {
+		
+	}
+	
+}

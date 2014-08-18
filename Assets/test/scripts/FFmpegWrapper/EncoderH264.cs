@@ -20,9 +20,7 @@ public class EncoderH264
 	int outWidth, outHeight,fps; 
 	int srcW , srcH;
 	int bitRate=800000;
-	
-	FileStream fs;
-	
+
 	byte[] src,dec;
 	int src_size,dec_size,c;
 	IntPtr srcP,decP;
@@ -41,11 +39,11 @@ public class EncoderH264
 		srcW=sourceTexture.width;
 		srcH=sourceTexture.height;
 	}
-	
+	//FileStream fs;
 	public void Prepare(){
 		colors=null;
-		string path = @"MyTest_h264.mp4";
-		fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Write);
+		//string path = @"MyTest_h264.mp4";
+		//fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Write);
 		
 		src = new byte[srcW * srcH*3];
 		src_size = src.Length;
@@ -76,7 +74,7 @@ public class EncoderH264
 			if (encode(srcP, src_size, decP, out dec_size) > 0)
 			{
 				Marshal.Copy(decP, dec, 0, dec_size);
-				fs.Write(dec, 0, dec_size);
+				//fs.Write(dec, 0, dec_size);
 				encoded=new byte[dec_size];
 				Buffer.BlockCopy(dec,0,encoded,0,dec_size);
 				c++;
@@ -97,8 +95,8 @@ public class EncoderH264
 		isStoped=true;
 		//timer.Change(Timeout.Infinite,Timeout.Infinite);
 		byte[] endcode = new byte[]{ 0, 0, 1, 0xb7 };
-		fs.Write(endcode, 0, endcode.Length);
-		fs.Close();
+		//fs.Write(endcode, 0, endcode.Length);
+		//fs.Close();
 		Marshal.FreeHGlobal(srcP);
 		Marshal.FreeHGlobal(decP);
 		
@@ -167,7 +165,8 @@ public class EncoderH264
 			return bitRate;
 		}
 		set {
-			bitRate = value;
+			if(value>0)
+				bitRate = value;
 		}
 	}
 }

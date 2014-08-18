@@ -2,7 +2,7 @@
 
 @script ExecuteInEditMode
 @script RequireComponent (Camera)
-@script AddComponentMenu ("Image Effects/Rendering/Sun Shafts")
+@script AddComponentMenu ("Image Effects/Sun Shafts")
 
 enum SunShaftsResolution {
     Low = 0,
@@ -58,23 +58,20 @@ class SunShafts extends PostEffectsBase
 		if(useDepthTexture)
 			camera.depthTextureMode |= DepthTextureMode.Depth;	
 		
-        var divider : int = 4;
+        var divider : float = 4.0;
         if (resolution == SunShaftsResolution.Normal)
-            divider = 2;
+            divider = 2.0;
         else if (resolution == SunShaftsResolution.High)
-            divider = 1;
+            divider = 1.0;
             
 		var v : Vector3 = Vector3.one * 0.5;
 		if (sunTransform)
 			v = camera.WorldToViewportPoint (sunTransform.position);
 		else 
-			v = Vector3(0.5, 0.5, 0.0);
-
-		var rtW : int = source.width / divider;
-		var rtH : int = source.height / divider;
+			v = Vector3(0.5, 0.5, 0.0);        
 			
-		var lrColorB : RenderTexture;
-        var lrDepthBuffer : RenderTexture = RenderTexture.GetTemporary (rtW, rtH, 0);
+		var secondQuarterRezColor : RenderTexture = RenderTexture.GetTemporary (source.width / divider, source.height / divider, 0);	
+        var lrDepthBuffer : RenderTexture = RenderTexture.GetTemporary (source.width / divider, source.height / divider, 0);
 		
 		// mask out everything except the skybox
 		// we have 2 methods, one of which requires depth buffer support, the other one is just comparing images
@@ -101,7 +98,7 @@ class SunShafts extends PostEffectsBase
 		        			
 		// radial blur:
 						
-		radialBlurIterations = Mathf.Clamp (radialBlurIterations, 1, 4);
+		radialBlurIterations = ClampBlurIterationsToSomethingThatMakesSense (radialBlurIterations);	
 				
 		var ofs : float = sunShaftBlurRadius * (1.0f / 768.0f);
 		
@@ -111,16 +108,12 @@ class SunShafts extends PostEffectsBase
 		for (var it2 : int = 0; it2 < radialBlurIterations; it2++ ) {
 			// each iteration takes 2 * 6 samples
 			// we update _BlurRadius each time to cheaply get a very smooth look
-			
-			lrColorB = RenderTexture.GetTemporary (rtW, rtH, 0);
-			Graphics.Blit (lrDepthBuffer, lrColorB, sunShaftsMaterial, 1);
-			RenderTexture.ReleaseTemporary (lrDepthBuffer);
+						
+			Graphics.Blit (lrDepthBuffer, secondQuarterRezColor, sunShaftsMaterial, 1);
 			ofs = sunShaftBlurRadius * (((it2 * 2.0f + 1.0f) * 6.0f)) / 768.0f;
 			sunShaftsMaterial.SetVector ("_BlurRadius4", Vector4 (ofs, ofs, 0.0f, 0.0f) );			
 			
-			lrDepthBuffer = RenderTexture.GetTemporary (rtW, rtH, 0);
-			Graphics.Blit (lrColorB, lrDepthBuffer, sunShaftsMaterial, 1);		
-			RenderTexture.ReleaseTemporary (lrColorB);
+			Graphics.Blit (secondQuarterRezColor, lrDepthBuffer, sunShaftsMaterial, 1);		
 			ofs = sunShaftBlurRadius * (((it2 * 2.0f + 2.0f) * 6.0f)) / 768.0f;			
 			sunShaftsMaterial.SetVector ("_BlurRadius4", Vector4 (ofs, ofs, 0.0f, 0.0f) );
 		}		
@@ -134,7 +127,19 @@ class SunShafts extends PostEffectsBase
 		sunShaftsMaterial.SetTexture ("_ColorBuffer", lrDepthBuffer);
 		Graphics.Blit (source, destination, sunShaftsMaterial, (screenBlendMode == ShaftsScreenBlendMode.Screen) ? 0 : 4); 	
 		
-		RenderTexture.ReleaseTemporary (lrDepthBuffer);
+		RenderTexture.ReleaseTemporary (lrDepthBuffer);	
+		RenderTexture.ReleaseTemporary (secondQuarterRezColor);	
+	}
+		
+	// helper functions
+
+	private function ClampBlurIterationsToSomethingThatMakesSense (its : int) : int {
+		if (its < 1)
+			return 1;
+		else if (its > 4)
+			return 4;		
+		else
+			return its;	
 	}
 
 }
