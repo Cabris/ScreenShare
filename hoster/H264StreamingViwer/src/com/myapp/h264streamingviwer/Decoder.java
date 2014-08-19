@@ -3,6 +3,9 @@ package com.myapp.h264streamingviwer;
 import android.os.Bundle;
 
 import java.nio.ByteBuffer;
+
+import com.stream.source.StreamSource;
+
 import android.app.Activity;
 import android.content.Context;
 import android.media.MediaCodec;
@@ -13,39 +16,26 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-public class Decoder implements SurfaceHolder.Callback {
+public class Decoder{
 
 	//private static String SAMPLE = "storage/sdcard1/" + "v2.mp4";
 	private PlayerThread mPlayer = null;
-	Context context;
+	SurfaceView sv;
 	StreamSource inputStream;
 
-	public Decoder(Context context, StreamSource input) {
-		this.context = context;
+	public Decoder(SurfaceView surfaceView, StreamSource input) {
+		this.sv = surfaceView;
 		this.inputStream = input;
 	}
 
 	public void onCreate(Bundle savedInstanceState) {
-		// super.onCreate(savedInstanceState);
-		SurfaceView sv = new SurfaceView(context);
-		sv.getHolder().addCallback(this);
-		((Activity) context).setContentView(sv);
-	}
-
-	@Override
-	public void surfaceCreated(SurfaceHolder holder) {
-	}
-
-	@Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 		if (mPlayer == null) {
-			mPlayer = new PlayerThread(holder.getSurface());
+			mPlayer = new PlayerThread(sv.getHolder().getSurface());
 			mPlayer.start();
 		}
 	}
 
-	@Override
-	public void surfaceDestroyed(SurfaceHolder holder) {
+	public void onDestroy() {
 		if (mPlayer != null) {
 			mPlayer.interrupt();
 		}
@@ -68,8 +58,8 @@ public class Decoder implements SurfaceHolder.Callback {
 			format.setInteger(MediaFormat.KEY_MAX_INPUT_SIZE, 800000);
 			format.setInteger(MediaFormat.KEY_WIDTH, 800);
 			format.setInteger(MediaFormat.KEY_HEIGHT, 480);
-			format.setInteger("max-width", 800);
-			format.setInteger("max-height", 480);
+			format.setInteger("max-width", 1080);
+			format.setInteger("max-height", 720);
 			format.setInteger("push-blank-buffers-on-shutdown", 1);
 			decoder = MediaCodec.createDecoderByType("video/avc");
 			decoder.configure(format, surface, null, 0);
@@ -85,10 +75,10 @@ public class Decoder implements SurfaceHolder.Callback {
 			ByteBuffer[] outputBuffers = decoder.getOutputBuffers();
 			BufferInfo info = new BufferInfo();
 			
-			while (!Thread.interrupted()) {
+			while (!Thread.interrupted()&&!inputStream.isEOS()) {
 				if (!inputStream.isEmpty()) {
 
-					int inIndex = decoder.dequeueInputBuffer(1000);
+					int inIndex = decoder.dequeueInputBuffer(10);
 					//Log.d("DecodeActivity", "inIndex: " + inIndex);
 					if (inIndex >= 0) {
 						ByteBuffer buffer = inputBuffers[inIndex];//
@@ -108,7 +98,7 @@ public class Decoder implements SurfaceHolder.Callback {
 						}
 					}
 
-					int outIndex = decoder.dequeueOutputBuffer(info, 1000);
+					int outIndex = decoder.dequeueOutputBuffer(info, 100);
 					switch (outIndex) {
 					case MediaCodec.INFO_OUTPUT_BUFFERS_CHANGED:
 						Log.d("DecodeActivity", "INFO_OUTPUT_BUFFERS_CHANGED");
@@ -144,7 +134,7 @@ public class Decoder implements SurfaceHolder.Callback {
 	int readSampleData(ByteBuffer buffer) {
 		if(inputStream.isEOS())
 			return -1;
-		//Log.d("DecodeActivity", "Try readSampleData0");
+		Log.d("StreamReceiver_queue_size", "queue_size: "+inputStream.getQueue().size());
 		if (!inputStream.isEmpty()) {
 			byte[] sampleData = inputStream.getQueue().poll();
 			buffer.clear();

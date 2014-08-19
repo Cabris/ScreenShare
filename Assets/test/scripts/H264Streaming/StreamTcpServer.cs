@@ -59,7 +59,7 @@ public class StreamTcpServer : MonoBehaviour {
 			clientStream.Write(lengthData, 0 , lengthData.Length); 
 			clientStream.Write(data, 0 , data.Length);         
 			clientStream.Flush();
-			Debug.Log("send: "+data.Length);
+//			Debug.Log("send: "+data.Length);
 			return length;
 		}          
 		return -1;

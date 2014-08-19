@@ -1,0 +1,48 @@
+package com.myapp.h264streamingviwer;
+
+import com.example.h264streamingviwer.R;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EdgeEffect;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class MainActivity extends Activity {
+
+	Decoder decoder;
+	StreamReceiver receiver;
+	FileReceiver fileReceiver;
+	
+	@Override
+	protected void onCreate(final Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_main);
+		Button connectButton=(Button) findViewById(R.id.connect_button);
+		final EditText ipAddress=(EditText) findViewById(R.id.ip_editText);
+		final EditText port=(EditText) findViewById(R.id.port_editText);
+		connectButton.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				String adrs=ipAddress.getText().toString();
+				
+				receiver=new StreamReceiver("192.168.1.48",8888);
+				receiver.Connect();
+				decoder = new Decoder(MainActivity.this,receiver);
+				decoder.onCreate(savedInstanceState);
+			}
+		});
+		
+	}
+
+	
+	protected void onDestroy() {
+		receiver.onDestory();
+		super.onDestroy();
+	}
+
+}

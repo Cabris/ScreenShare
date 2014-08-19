@@ -12,12 +12,10 @@
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.StreamReceiver"/>
 <fullyQualifiedTypeName name="android.nfc.cardemulation.OffHostApduService"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.StreamReceiver.SubThread"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="com.comman.BitConverter"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.concurrent.ConcurrentLinkedQueue"/>
 <fullyQualifiedTypeName name="android.content.Context"/>
-<fullyQualifiedTypeName name="android.R.integer"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.FileReceiver"/>
 <fullyQualifiedTypeName name="android.R.string"/>
 <fullyQualifiedTypeName name="java.lang.Thread"/>
@@ -30,4 +28,20 @@
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="android.R.bool"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.StreamReceiver.ReceiveThread"/>
+<fullyQualifiedTypeName name="android.view.Window"/>
+<fullyQualifiedTypeName name="com.example.h264streamingviwer.R.layout"/>
+<fullyQualifiedTypeName name="com.example.h264streamingviwer.R"/>
+<fullyQualifiedTypeName name="android.widget.Button"/>
+<fullyQualifiedTypeName name="android.view.View"/>
+<fullyQualifiedTypeName name="com.myapp.h264streamingviwer.MainActivity.onConnect"/>
+<fullyQualifiedTypeName name="android.widget.TextView"/>
+<fullyQualifiedTypeName name="android.widget.EdgeEffect"/>
+<fullyQualifiedTypeName name="android.widget.EditText"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="android.R.integer"/>
+<fullyQualifiedTypeName name="android.view.SurfaceView"/>
+<fullyQualifiedTypeName name="com.example.h264streamingviwer.R.id"/>
+<fullyQualifiedTypeName name="com.stream.source.StreamSource"/>
+<fullyQualifiedTypeName name="com.stream.source.FileReceiver"/>
+<fullyQualifiedTypeName name="com.stream.source.StreamReceiver"/>
 </qualifiedTypeNameHistroy>

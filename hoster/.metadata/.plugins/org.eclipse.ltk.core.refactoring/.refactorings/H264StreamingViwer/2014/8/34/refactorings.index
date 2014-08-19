@@ -2,3 +2,11 @@
 1408279509751	Rename type 'readThread'
 1408354911238	Extract method 'isMatch'
 1408355381736	Extract method 'extractSPS_PPS'
+1408400010555	Rename field 'editText1'
+1408400024674	Rename field 'editText2'
+1408400043367	Rename field 'button1'
+1408400901758	Rename local variable 'ipAddress'
+1408400908247	Rename local variable 'port'
+1408401501393	Delete element
+1408401657410	Rename field 'surfaceView1'
+1408401791355	Rename local variable 'context'

@@ -85,7 +85,7 @@ public class CameraSource : MonoBehaviour {
 	void getFrame ()
 	{
 		isOK = false;
-		if(BufferStack.Count>15)
+		if(BufferStack.Count>2)
 			BufferStack.Clear();
 		UnityEngine.Color32[] colors = sourceTexture.GetPixels32 ();
 		BufferStack.Push (colors);

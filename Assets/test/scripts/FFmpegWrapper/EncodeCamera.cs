@@ -49,7 +49,7 @@ public class EncodeCamera : MonoBehaviour {
 		if(isEncoding){
 		byte[] encoded= encoder.Encoding();
 		server.Send(encoded);
-		Debug.Log(encoded.Length);
+		//Debug.Log(encoded.Length);
 		tatol+=encoded.Length;
 		}
 	}

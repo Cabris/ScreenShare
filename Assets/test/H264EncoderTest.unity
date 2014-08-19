@@ -5019,6 +5019,30 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.14587462
       objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
+      propertyPath: width
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
+      propertyPath: height
+      value: 480
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
+      propertyPath: outWidth
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
+      propertyPath: outHeight
+      value: 480
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
+      propertyPath: fps
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
+      propertyPath: bitRate
+      value: 800000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
   m_RootGameObject: {fileID: 1705746202}
@@ -41421,7 +41445,7 @@ MonoBehaviour:
   source: {fileID: 1831905684}
   outWidth: 800
   outHeight: 480
-  fps: 15
+  fps: 30
   bitRate: 800000
 --- !u!114 &1831905684
 MonoBehaviour:
