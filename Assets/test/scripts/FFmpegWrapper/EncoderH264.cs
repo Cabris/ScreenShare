@@ -25,7 +25,7 @@ public class EncoderH264
 	int src_size,dec_size,c;
 	IntPtr srcP,decP;
 	
-	Stack  sourceBuffer;
+	ConcurrentStack<UnityEngine.Color32[]>  sourceBuffer;
 	//Timer timer;
 	Stopwatch stopWatch;
 	bool isStarted=false;
@@ -33,7 +33,7 @@ public class EncoderH264
 	
 	UnityEngine.Color32[] colors;
 	
-	public EncoderH264 (Stack  buffer,UnityEngine.Texture2D sourceTexture)
+	public EncoderH264 (ConcurrentStack<UnityEngine.Color32[]>  buffer,UnityEngine.Texture2D sourceTexture)
 	{
 		this.sourceBuffer=buffer;
 		srcW=sourceTexture.width;
@@ -58,7 +58,7 @@ public class EncoderH264
 	}
 	
 	public void StartEncoder(){
-		startEncoder(srcW, srcH, outWidth, outHeight, 800000, fps);
+		startEncoder(srcW, srcH, outWidth, outHeight, bitRate, fps);
 		//int period=1000/fps;
 		//timer=new Timer(Encoding,null,0,period);
 		stopWatch.Start();
@@ -67,6 +67,8 @@ public class EncoderH264
 	
 	public byte[] Encoding(){
 		byte[] encoded=new byte[0];
+		if(!isStarted)
+			return encoded;
 		try{
 //			UnityEngine.Debug.Log("buffer: "+sourceBuffer.Count);
 			createFrameFromSource(src);
@@ -114,7 +116,7 @@ public class EncoderH264
 	private void createFrameFromSource(byte[] src)
 	{
 		if(sourceBuffer.Count>0){
-			colors=sourceBuffer.Pop() as UnityEngine.Color32[];
+			colors=sourceBuffer.Pop();
 			sourceBuffer.Clear();
 		}
 		

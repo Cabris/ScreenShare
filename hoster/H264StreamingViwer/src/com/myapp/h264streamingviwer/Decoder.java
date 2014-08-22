@@ -56,9 +56,9 @@ public class Decoder{
 			MediaFormat format = new MediaFormat();
 			format.setString(MediaFormat.KEY_MIME, "video/avc");
 			format.setInteger(MediaFormat.KEY_MAX_INPUT_SIZE, 800000);
-			format.setInteger(MediaFormat.KEY_WIDTH, 800);
-			format.setInteger(MediaFormat.KEY_HEIGHT, 480);
-			format.setInteger("max-width", 1080);
+			format.setInteger(MediaFormat.KEY_WIDTH, 1280);
+			format.setInteger(MediaFormat.KEY_HEIGHT, 720);
+			format.setInteger("max-width", 1280);
 			format.setInteger("max-height", 720);
 			format.setInteger("push-blank-buffers-on-shutdown", 1);
 			decoder = MediaCodec.createDecoderByType("video/avc");
@@ -78,7 +78,7 @@ public class Decoder{
 			while (!Thread.interrupted()&&!inputStream.isEOS()) {
 				if (!inputStream.isEmpty()) {
 
-					int inIndex = decoder.dequeueInputBuffer(10);
+					int inIndex = decoder.dequeueInputBuffer(100);
 					//Log.d("DecodeActivity", "inIndex: " + inIndex);
 					if (inIndex >= 0) {
 						ByteBuffer buffer = inputBuffers[inIndex];//
@@ -134,7 +134,6 @@ public class Decoder{
 	int readSampleData(ByteBuffer buffer) {
 		if(inputStream.isEOS())
 			return -1;
-		Log.d("StreamReceiver_queue_size", "queue_size: "+inputStream.getQueue().size());
 		if (!inputStream.isEmpty()) {
 			byte[] sampleData = inputStream.getQueue().poll();
 			buffer.clear();

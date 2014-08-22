@@ -1,0 +1,4 @@
+1408545802691	Extract method 'getPacketFromBuffer'
+1408546020337	Extract method 'updateLength'
+1408546067042	Extract method 'fillBuffer'
+1408647547387	Rename field 'maxFillInBufferSize'

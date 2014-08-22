@@ -5021,11 +5021,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
       propertyPath: width
-      value: 800
+      value: 1280
       objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
       propertyPath: height
-      value: 480
+      value: 720
       objectReference: {fileID: 0}
     - target: {fileID: 11400008, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
       propertyPath: outWidth
@@ -5037,11 +5037,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400008, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
       propertyPath: fps
-      value: 30
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 11400008, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
       propertyPath: bitRate
-      value: 800000
+      value: 900000
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
+      propertyPath: fullScreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
+      propertyPath: fps
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
@@ -19396,8 +19404,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aabcd91738bea2438abe5da8b17364b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fps: 0
   width: 800
   height: 480
+  fullScreen: 0
+  stackSize: 0
 --- !u!114 &801361981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41445,8 +41456,8 @@ MonoBehaviour:
   source: {fileID: 1831905684}
   outWidth: 800
   outHeight: 480
-  fps: 30
-  bitRate: 800000
+  fps: 60
+  bitRate: 900000
 --- !u!114 &1831905684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41459,8 +41470,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aabcd91738bea2438abe5da8b17364b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 800
-  height: 480
+  fps: 30
+  width: 1280
+  height: 720
+  fullScreen: 1
+  stackSize: 0
 --- !u!81 &1831905685
 AudioListener:
   m_ObjectHideFlags: 0

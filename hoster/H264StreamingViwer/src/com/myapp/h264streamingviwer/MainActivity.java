@@ -1,11 +1,15 @@
 package com.myapp.h264streamingviwer;
 
+import java.io.IOException;
+
 import com.example.h264streamingviwer.R;
 import com.stream.source.FileReceiver;
 import com.stream.source.StreamReceiver;
 
+import android.R.integer;
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
@@ -32,7 +36,29 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				String adrs = ipAddressText.getText().toString();
 				int port = Integer.parseInt(portText.getText().toString());
-				receiver = new StreamReceiver(adrs, port);
+				receiver = new StreamReceiver(adrs, port){
+					@Override
+					protected int fillBuffer() throws IOException {
+						int bytesRead=super.fillBuffer();
+						Log.d("StreamReceiver", "fill buffer: " +currentLength+"/"+targetLength);
+						return bytesRead;
+					}
+					
+					@Override
+					protected void gotPacket(byte[] packet) {
+						super.gotPacket(packet);
+						Log.d("StreamReceiver", "gotPacket: " + packet.length);
+						//Log.d("StreamReceiver", "queue_size: "+getQueue().size());
+					}
+					
+					@Override
+					protected int updateLength() throws IOException, Exception {
+						int i=super.updateLength();
+						Log.d("StreamReceiver", "updateLength: " +currentLength+"/"+ targetLength);
+						return i;
+					}
+					
+				};
 				receiver.Connect();
 				decoder = new Decoder(surfaceView, receiver);
 				decoder.onCreate(savedInstanceState);

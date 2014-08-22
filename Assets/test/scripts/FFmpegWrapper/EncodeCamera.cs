@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Text;
+using System.Threading;
+using System;
 public class EncodeCamera : MonoBehaviour {
-
+	
 	EncoderH264 encoder;
 	[SerializeField]
 	CameraSource source;
@@ -11,7 +13,9 @@ public class EncodeCamera : MonoBehaviour {
 	[SerializeField]
 	int bitRate;
 	StreamTcpServer server;
-
+	long tatol=0;
+	Timer t;
+	bool isEncoding=false;
 	ASCIIEncoding ascEncoder = new ASCIIEncoding();
 	// Use this for initialization
 	void Start () {
@@ -22,42 +26,53 @@ public class EncodeCamera : MonoBehaviour {
 		encoder.BitRate=bitRate;
 		encoder.Prepare();
 		server=GetComponent<StreamTcpServer>();
+		t=new Timer(new TimerCallback(Encoding));
 	}
-	bool isEncoding=false;
+
 	// Update is called once per frame
 	void Update () {
-	
+		
 		if(Input.GetKeyDown(KeyCode.F2)){
 			isEncoding=!isEncoding;
 			if(isEncoding)
-				encoder.StartEncoder();
+				startEncoding();
 			if(!isEncoding)
-				encoder.StopEncoder();
+				stopEncoding();
 			Debug.Log("isEncoding: "+isEncoding);
-			if(isEncoding){
-				float period=1f/(float)fps;
-				InvokeRepeating("Encoding",0,period);
-			}else{
-				CancelInvoke("Encoding");
-			}
 		}			
 	}
+	
 
-	long tatol=0;
+	void startEncoding(){
+		encoder.StartEncoder();
+		int period=1000/fps;
+		t.Change(0,period);
+		isEncoding=true;
+	}
 
-	void  Encoding(){
+	void  Encoding(object state){
+		try{
 		if(isEncoding){
-		byte[] encoded= encoder.Encoding();
-		server.Send(encoded);
-		//Debug.Log(encoded.Length);
-		tatol+=encoded.Length;
+			byte[] encoded= encoder.Encoding();
+			server.Send(encoded);
+			Debug.Log(encoded.Length);
+			tatol+=encoded.Length;
+			}
+		}catch(Exception e){
+			Debug.LogException(e);
 		}
+	}
+
+	void stopEncoding(){
+		isEncoding=false;
+		t.Change(Timeout.Infinite,Timeout.Infinite);
+		encoder.StopEncoder();
+		t.Dispose();
+		server.onDestory();
 	}
 
 	void OnApplicationQuit() {
 		Debug.Log("tatol: "+tatol);
-		CancelInvoke("Encoding");
-		if(encoder!=null)
-			encoder.StopEncoder();
+		stopEncoding();
 	}
 }

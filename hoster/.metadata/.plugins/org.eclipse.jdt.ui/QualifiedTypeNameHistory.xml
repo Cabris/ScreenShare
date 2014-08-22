@@ -8,7 +8,6 @@
 <fullyQualifiedTypeName name="java.io.BufferedReader"/>
 <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
 <fullyQualifiedTypeName name="java.io.InputStream"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.StreamReceiver"/>
 <fullyQualifiedTypeName name="android.nfc.cardemulation.OffHostApduService"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.StreamReceiver.SubThread"/>
@@ -43,5 +42,7 @@
 <fullyQualifiedTypeName name="com.example.h264streamingviwer.R.id"/>
 <fullyQualifiedTypeName name="com.stream.source.StreamSource"/>
 <fullyQualifiedTypeName name="com.stream.source.FileReceiver"/>
+<fullyQualifiedTypeName name="java.io.BufferedInputStream"/>
 <fullyQualifiedTypeName name="com.stream.source.StreamReceiver"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
 </qualifiedTypeNameHistroy>
