@@ -7,8 +7,8 @@ using System.Threading;
 
 public class StreamTcpServer : MonoBehaviour {
 
-	public delegate void OnClientSendMessageEvent(int cid,string msg);
-	public OnClientSendMessageEvent OnClientSendMessage;
+//	public delegate void OnClientSendMessageEvent(int cid,string msg);
+//	public OnClientSendMessageEvent OnClientSendMessage;
 
 	private TcpListener tcpListener;
 	private Thread listenThread;
@@ -59,7 +59,7 @@ public class StreamTcpServer : MonoBehaviour {
 	{
 		TcpClient tcpClient = (TcpClient)client;
 		tcpClient.NoDelay=true;
-		tcpClient.SendBufferSize=150000;
+		tcpClient.SendBufferSize=60000;
 		clients.Add(tcpClient);
 	}
 	
@@ -88,9 +88,8 @@ public class StreamTcpServer : MonoBehaviour {
 		}   
 	}
 
-	public static byte[] getBytes(int x) {
-		return new byte[] { (byte) (x >> 24), (byte) (x >> 16),
-			(byte) (x >> 8), (byte) x };
+	byte[] getBytes(int x) {
+		return BitConverter2.getBytes(x);
 	}
 
 	public void onDestory(){

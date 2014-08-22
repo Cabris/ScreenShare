@@ -17,14 +17,10 @@
 <fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.FileReceiver"/>
 <fullyQualifiedTypeName name="android.R.string"/>
-<fullyQualifiedTypeName name="java.lang.Thread"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.FileReceiver.readThread"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.FileReceiver.ReadThread"/>
-<fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="java.util.Arrays"/>
-<fullyQualifiedTypeName name="java.nio.ByteBuffer"/>
 <fullyQualifiedTypeName name="java.io.Console"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="android.R.bool"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.StreamReceiver.ReceiveThread"/>
 <fullyQualifiedTypeName name="android.view.Window"/>
@@ -43,6 +39,12 @@
 <fullyQualifiedTypeName name="com.stream.source.StreamSource"/>
 <fullyQualifiedTypeName name="com.stream.source.FileReceiver"/>
 <fullyQualifiedTypeName name="java.io.BufferedInputStream"/>
-<fullyQualifiedTypeName name="com.stream.source.StreamReceiver"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="com.comman.BitConverter2"/>
+<fullyQualifiedTypeName name="com.test.LacalTest"/>
+<fullyQualifiedTypeName name="com.stream.source.StreamReceiver"/>
+<fullyQualifiedTypeName name="java.lang.Thread"/>
+<fullyQualifiedTypeName name="java.nio.ByteBuffer"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
 </qualifiedTypeNameHistroy>

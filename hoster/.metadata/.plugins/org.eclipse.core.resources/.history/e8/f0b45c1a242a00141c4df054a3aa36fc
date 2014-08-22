@@ -1,0 +1,22 @@
+package com.test;
+
+public class Tester extends Thread{
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Tester test=new Tester();
+		test.start();
+	}
+	
+	public Tester(){
+		
+	}
+	
+	@Override
+	public void run() {
+		super.run();
+	}
+
+}

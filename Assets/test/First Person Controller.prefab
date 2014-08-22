@@ -52,6 +52,7 @@ GameObject:
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400012}
+  - 45: {fileID: 4500000}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -76,9 +77,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_LocalRotation: {x: 0, y: .635379016, z: 0, w: .772200525}
-  m_LocalPosition: {x: 219.385025, y: 8.7432785, z: 273.193604}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.37000084, y: 7.41785192, z: -2.20588064}
+  m_LocalScale: {x: 1.14587462, y: 1.14587462, z: 1.14587462}
   m_Children:
   - {fileID: 400000}
   - {fileID: 400004}
@@ -151,6 +152,14 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Mesh: {fileID: 10205, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!45 &4500000
+Skybox:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: e222162ddb8d34547a133b673221b195, type: 2}
 --- !u!81 &8100000
 AudioListener:
   m_ObjectHideFlags: 1
@@ -281,8 +290,9 @@ MonoBehaviour:
   source: {fileID: 11400010}
   outWidth: 800
   outHeight: 480
-  fps: 15
-  bitRate: 800000
+  fps: 60
+  bitRate: 900000
+  blocking: 0
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -294,8 +304,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aabcd91738bea2438abe5da8b17364b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 800
-  height: 480
+  fps: 30
+  width: 1280
+  height: 720
+  fullScreen: 1
+  stackSize: 0
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -16,7 +16,7 @@ public class EncodeCamera : MonoBehaviour {
 	long tatol=0;
 	Timer t;
 	bool isEncoding=false;
-	ASCIIEncoding ascEncoder = new ASCIIEncoding();
+	System.Object obj;
 	// Use this for initialization
 	void Start () {
 		encoder=new EncoderH264(source.BufferStack ,source.SourceTexture);
@@ -27,8 +27,9 @@ public class EncodeCamera : MonoBehaviour {
 		encoder.Prepare();
 		server=GetComponent<StreamTcpServer>();
 		t=new Timer(new TimerCallback(Encoding));
+		obj=this;
 	}
-
+	
 	// Update is called once per frame
 	void Update () {
 		
@@ -39,38 +40,44 @@ public class EncodeCamera : MonoBehaviour {
 			if(!isEncoding)
 				stopEncoding();
 			Debug.Log("isEncoding: "+isEncoding);
-		}			
+		}
+		//Debug.Log("blocking: "+blocking);
 	}
 	
-
+	
 	void startEncoding(){
 		encoder.StartEncoder();
 		int period=1000/fps;
 		t.Change(0,period);
 		isEncoding=true;
 	}
-
+	[SerializeField]
+	int blocking=0;
 	void  Encoding(object state){
-		try{
-		if(isEncoding){
-			byte[] encoded= encoder.Encoding();
-			server.Send(encoded);
-			Debug.Log(encoded.Length);
-			tatol+=encoded.Length;
+		blocking++;
+		lock(obj){
+			try{
+				if(isEncoding){
+					byte[] encoded= encoder.Encoding();
+					server.Send(encoded);
+					//Debug.Log(encoded.Length);
+					tatol+=encoded.Length;
+				}
+			}catch(Exception e){
+				Debug.LogException(e);
 			}
-		}catch(Exception e){
-			Debug.LogException(e);
 		}
+		blocking--;
 	}
-
+	
 	void stopEncoding(){
 		isEncoding=false;
 		t.Change(Timeout.Infinite,Timeout.Infinite);
-		encoder.StopEncoder();
+		encoder.StopEncoder();//dead
 		t.Dispose();
 		server.onDestory();
 	}
-
+	
 	void OnApplicationQuit() {
 		Debug.Log("tatol: "+tatol);
 		stopEncoding();

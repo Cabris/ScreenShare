@@ -1,0 +1,50 @@
+package com.test;
+
+import java.nio.ByteBuffer;
+
+import com.comman.BitConverter2;
+
+public class Tester extends Thread{
+	ByteBuffer lengthBuffer;
+	byte[] lengthData = new byte[4];
+	public Tester(){
+		super();
+		
+	}
+	
+	@Override
+	public void run() {
+		super.run();
+		while (Thread.interrupted()) {
+			updateLength();
+		}
+	}
+	
+	
+	protected void updateLength() throws Exception {
+		lengthBuffer.clear();
+		int haveRead = 0;
+		while (true) {
+			int bytesRead = inputStream.read(lengthData,0,4-haveRead);
+			if (bytesRead > 0) {
+				lengthBuffer.put(lengthData, 0, bytesRead);
+				haveRead += bytesRead;
+				log.info("fill targetLength: "+haveRead+"/"+4);
+			}
+			if (haveRead == lengthData.length)
+				break;
+		}
+		lengthBuffer.flip();
+		lengthBuffer.get(lengthData);
+		targetLength = BitConverter2.toInt(lengthData);
+		log.info("update targetLength: "+  targetLength);
+		if(targetLength<0)
+			throw new Exception("negi length");
+	}
+
+	public static void main(String[] args) {
+		Tester test=new Tester();
+		test.start();
+	}
+	
+}

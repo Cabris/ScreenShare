@@ -2,3 +2,6 @@
 1408546020337	Extract method 'updateLength'
 1408546067042	Extract method 'fillBuffer'
 1408647547387	Rename field 'maxFillInBufferSize'
+1408672132239	Rename field 'byteBuffer'
+1408672987287	Rename local variable 'readed'
+1408673002297	Rename local variable 'read'

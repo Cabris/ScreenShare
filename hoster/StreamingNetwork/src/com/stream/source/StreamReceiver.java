@@ -1,4 +1,5 @@
 package com.stream.source;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,6 +7,7 @@ import java.net.*;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.logging.Logger;
 import com.comman.*;
 
 public class StreamReceiver extends StreamSource {
@@ -19,12 +21,16 @@ public class StreamReceiver extends StreamSource {
 
 	long total = 0;
 	boolean firstPacket = false;
-	ByteBuffer byteBuffer;
+	ByteBuffer frameBuffer;
+	ByteBuffer lengthBuffer;
 	protected int targetLength = 0;
 	protected int currentLength = 0;
-
+	int maxBufferSize = 10000000;
 	BufferedInputStream inFromServer;
 
+	
+	private static Logger log = Logger.getLogger(StreamReceiver.class.getName());
+	
 	public StreamReceiver(String ip, int port) {
 		this.ipAddress = ip;
 		this.port = port;
@@ -37,87 +43,60 @@ public class StreamReceiver extends StreamSource {
 	}
 
 	public void onDestory() {
+		try {
+			clientSocket.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		receiveThread.interrupt();
-	}
-
-	public String getIpAddress() {
-		return ipAddress;
-	}
-
-	public void setIpAddress(String ipAddress) {
-		this.ipAddress = ipAddress;
-	}
-
-	public int getPort() {
-		return port;
-	}
-
-	public void setPort(int port) {
-		this.port = port;
 	}
 
 	@Override
 	public boolean isEOS() {
 		return isEof;
 	}
-	
-	ByteBuffer lengthBuffer=ByteBuffer.allocate(4);
-	protected int updateLength() throws IOException, Exception {
-		int bytesRead;
-		byte[] lengthData = new byte[4];
-		
+
+	byte[] lengthData = new byte[4];
+	protected void updateLength() throws Exception {
 		lengthBuffer.clear();
-		int readed=0;
+		int haveRead = 0;
 		while (true) {
-			bytesRead = inputStream.read(lengthData);
-			if(bytesRead>0){
-				lengthBuffer.put(lengthData,0,bytesRead);
-				readed+=bytesRead;
+			int bytesRead = inputStream.read(lengthData,0,4-haveRead);
+			if (bytesRead > 0) {
+				lengthBuffer.put(lengthData, 0, bytesRead);
+				haveRead += bytesRead;
+				log.info("fill targetLength: "+haveRead+"/"+4);
 			}
-			if(readed==lengthData.length)
+			if (haveRead == lengthData.length)
 				break;
 		}
 		lengthBuffer.flip();
 		lengthBuffer.get(lengthData);
-		targetLength = BitConverter.toInt32(lengthData, 0);
-		currentLength = 0;
-		return bytesRead;
+		targetLength = BitConverter2.toInt(lengthData);
+		log.info("update targetLength: "+  targetLength);
+		if(targetLength<0)
+			throw new Exception("negi length");
 	}
 	
-	private void getPacketFromBuffer() {
-		byte[] packet = new byte[targetLength];
-		byteBuffer.flip();
-		byteBuffer.get(packet);
-		gotPacket(packet);
-		byteBuffer.clear();
-		// Log.d("StreamReceiver", "byteBuffer.get: " + targetLength);
-	}
-
-//	protected void fillBuffer() throws IOException {
-//		//while (currentLength < targetLength) {
-//			int b = inFromServer.read();
-//			if (b == -1) {
-//				return;
-//			} else {
-//				currentLength += 1;
-//				byteBuffer.put((byte) b);
-//			}
-//		//}
-//	}
-	int maxBufferSize=10000000;
-	byte[] fillInBuffer= new byte[maxBufferSize];
-	protected int fillBuffer() throws IOException {
-		int bytesRead=0;
-		//byte[] buffer = new byte[targetLength - currentLength];
-		bytesRead = inputStream.read(fillInBuffer,0,targetLength - currentLength);
-		if(bytesRead<0)
-			return 0;
-		//byte[] actual_read_buffer = new byte[bytesRead];
-		//System.arraycopy(buffer, 0, actual_read_buffer, 0, bytesRead);
-		currentLength += bytesRead;
-		byteBuffer.put(fillInBuffer,0,bytesRead);
-		return bytesRead;
-		// Log.d("StreamReceiver", "fill buffer: " + bytesRead);
+	byte[] fillInBuffer = new byte[maxBufferSize];
+	protected void fillBuffer() throws Exception {
+		currentLength=0;
+		frameBuffer.clear();
+		while(true){
+			int bytesRead = inputStream.read(fillInBuffer,0,targetLength-currentLength);
+			if(bytesRead>0){
+				frameBuffer.put(fillInBuffer,0,bytesRead);
+				currentLength+=bytesRead;
+				log.info("fill:"+currentLength+"/"+targetLength);
+			}
+			if(currentLength==targetLength)
+				break;
+		}
+		log.info("fill finished:"+currentLength+"/"+targetLength);
+		byte[] data=new byte[targetLength];
+		frameBuffer.flip();
+		frameBuffer.get(data);
+		gotPacket(data);
 	}
 
 	protected void gotPacket(byte[] packet) {
@@ -164,8 +143,6 @@ public class StreamReceiver extends StreamSource {
 
 	private void enqueue(byte[] packet) {
 		queue.add(packet);
-		// Log.d("StreamReceiver", "packet: " + packet.length);
-		// Log.d("StreamReceiver_queue_size", "queue size: " + queue.size());
 	}
 
 	private boolean isMatch(byte[] packet, byte[] uselessCode, int i) {
@@ -176,8 +153,13 @@ public class StreamReceiver extends StreamSource {
 	private class ReceiveThread extends Thread {
 
 		public ReceiveThread() {
-			byteBuffer = ByteBuffer.allocate(maxBufferSize);
-			byteBuffer.clear();
+			super();
+			frameBuffer = ByteBuffer.allocate(maxBufferSize);
+			frameBuffer.clear();
+			lengthBuffer = ByteBuffer.allocate(4);
+			lengthBuffer.clear();
+			targetLength = 0;
+			currentLength = 0;
 		}
 
 		@Override
@@ -188,32 +170,14 @@ public class StreamReceiver extends StreamSource {
 				clientSocket.setTcpNoDelay(true);
 				inputStream = clientSocket.getInputStream();
 				inFromServer = new BufferedInputStream(inputStream);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			try {
-				targetLength = 0;
-				currentLength = 0;
 				while (!Thread.interrupted()) {
-					int bytesRead = 0;
-					if (targetLength == currentLength) {// need to update the length
-						if (targetLength > 0) {// get a packet
-							getPacketFromBuffer();
-						}
-						bytesRead = updateLength();
-						if (bytesRead <= 0) {// no input
-							// Log.d("StreamReceiver", "interrupted, total: " + total);
-							Thread.interrupted();
-							isEof = true;
-							break;
-						}
-					} else {// fill in the buffer
-						fillBuffer();
-					}
+					updateLength();
+					fillBuffer();
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
+			}finally{
+				onDestory();
 			}
 		}
 	}
