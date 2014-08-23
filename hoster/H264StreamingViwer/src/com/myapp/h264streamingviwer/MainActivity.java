@@ -1,15 +1,11 @@
 package com.myapp.h264streamingviwer;
 
-import java.io.IOException;
-
 import com.example.h264streamingviwer.R;
 import com.stream.source.FileReceiver;
 import com.stream.source.StreamReceiver;
 
-import android.R.integer;
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;

@@ -61,9 +61,13 @@ public class EncoderH264
 	
 	public void StartEncoder(){
 		lock(obj){
+			try{
 			startEncoder(srcW, srcH, outWidth, outHeight, bitRate, fps);
 			stopWatch.Start();
 			isStarted=true;
+			}catch(Exception e){
+				UnityEngine.Debug.LogException(e);
+			}
 		}
 	}
 	

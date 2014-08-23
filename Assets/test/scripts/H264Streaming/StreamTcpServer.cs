@@ -4,16 +4,15 @@ using System.Net;
 using System;
 using System.Net.Sockets;
 using System.Threading;
+using System.IO;
 
 public class StreamTcpServer : MonoBehaviour {
-
-//	public delegate void OnClientSendMessageEvent(int cid,string msg);
-//	public OnClientSendMessageEvent OnClientSendMessage;
-
+	
 	private TcpListener tcpListener;
 	private Thread listenThread;
 	List<TcpClient> clients=new List<TcpClient>();
-	
+	List<BufferedStream> bStreams=new List<BufferedStream>();
+
 	// Use this for initialization
 	void Start () {
 		this.tcpListener = new TcpListener(IPAddress.Any, 8888);
@@ -61,38 +60,43 @@ public class StreamTcpServer : MonoBehaviour {
 		tcpClient.NoDelay=true;
 		tcpClient.SendBufferSize=60000;
 		clients.Add(tcpClient);
+		BufferedStream bs=new BufferedStream(tcpClient.GetStream());
+		bStreams.Add(bs);
 	}
 	
 	public int Send(byte [] data){
-		foreach(TcpClient c in clients){
-			NetworkStream clientStream = c.GetStream();
+		for(int i=0;i<bStreams.Count;i++){
+			BufferedStream bs=bStreams[i];
 			int length=data.Length;
 			byte[] lengthData=getBytes(length);
-			clientStream.Write(lengthData, 0 , lengthData.Length); 
-			clientStream.Write(data, 0 , data.Length);         
-			clientStream.Flush();
+			bs.Write(lengthData, 0 , lengthData.Length); 
+			bs.Write(data, 0 , data.Length);   
+			bs.Flush();
+//			clientStream.Flush();
 //			Debug.Log("send: "+data.Length);
 			return length;
 		}          
 		return -1;
 	}
 
-	public void ForseStopClients(){
-		foreach(TcpClient c in clients){
-			NetworkStream clientStream = c.GetStream();
-			int length=-1;
-			byte[] lengthData=getBytes(length);
-			clientStream.Write(lengthData, 0 , lengthData.Length);          
-			clientStream.Flush();
-			Debug.Log("ForseStopClients: "+length);
-		}   
-	}
+//	public void ForseStopClients(){
+//		foreach(TcpClient c in clients){
+//			NetworkStream clientStream = c.GetStream();
+//			int length=-1;
+//			byte[] lengthData=getBytes(length);
+//			clientStream.Write(lengthData, 0 , lengthData.Length);          
+//			clientStream.Flush();
+//			Debug.Log("ForseStopClients: "+length);
+//		}   
+//	}
 
 	byte[] getBytes(int x) {
 		return BitConverter2.getBytes(x);
 	}
 
 	public void onDestory(){
+		foreach(BufferedStream bs in bStreams)
+			bs.Close();
 		foreach(TcpClient c in clients)
 			c.Close();
 		tcpListener.Stop();

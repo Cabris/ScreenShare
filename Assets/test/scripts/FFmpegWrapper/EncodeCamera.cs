@@ -9,9 +9,14 @@ public class EncodeCamera : MonoBehaviour {
 	[SerializeField]
 	CameraSource source;
 	[SerializeField]
-	int outWidth,outHeight,fps;
+	int outWidth,outHeight;
+	[SerializeField]
+	bool isSameAsSource;
+	[SerializeField]
+	int fps;
 	[SerializeField]
 	int bitRate;
+
 	StreamTcpServer server;
 	long tatol=0;
 	Timer t;
@@ -19,6 +24,10 @@ public class EncodeCamera : MonoBehaviour {
 	System.Object obj;
 	// Use this for initialization
 	void Start () {
+		if(isSameAsSource){
+			outWidth=source.Width;
+			outHeight=source.Height;
+		}
 		encoder=new EncoderH264(source.BufferStack ,source.SourceTexture);
 		encoder.OutWidth=outWidth;
 		encoder.OutHeight=outHeight;
@@ -56,15 +65,11 @@ public class EncodeCamera : MonoBehaviour {
 	void  Encoding(object state){
 		blocking++;
 		lock(obj){
-			try{
-				if(isEncoding){
-					byte[] encoded= encoder.Encoding();
-					server.Send(encoded);
-					//Debug.Log(encoded.Length);
-					tatol+=encoded.Length;
-				}
-			}catch(Exception e){
-				Debug.LogException(e);
+			if(isEncoding){
+				byte[] encoded= encoder.Encoding();
+				server.Send(encoded);//blocking point
+				tatol+=encoded.Length;
+				//Debug.Log(encoded.Length);
 			}
 		}
 		blocking--;

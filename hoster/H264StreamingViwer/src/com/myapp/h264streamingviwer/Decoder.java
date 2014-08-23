@@ -6,6 +6,7 @@ import java.nio.ByteBuffer;
 
 import com.stream.source.StreamSource;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.media.MediaCodec;
@@ -16,9 +17,8 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-public class Decoder{
+public class Decoder {
 
-	//private static String SAMPLE = "storage/sdcard1/" + "v2.mp4";
 	private PlayerThread mPlayer = null;
 	SurfaceView sv;
 	StreamSource inputStream;
@@ -42,25 +42,26 @@ public class Decoder{
 	}
 
 	private class PlayerThread extends Thread {
-		// private MediaExtractor extractor;
 		private MediaCodec decoder;
 		private Surface surface;
-		long pts = 0;
+		private long pts;
 
 		public PlayerThread(Surface surface) {
 			this.surface = surface;
+			this.pts=0;
 		}
 
+		@SuppressLint("InlinedApi")
 		@Override
 		public void run() {
 			MediaFormat format = new MediaFormat();
 			format.setString(MediaFormat.KEY_MIME, "video/avc");
-			format.setInteger(MediaFormat.KEY_MAX_INPUT_SIZE, 800000);
+			format.setInteger(MediaFormat.KEY_MAX_INPUT_SIZE, 2000000);
 			format.setInteger(MediaFormat.KEY_WIDTH, 1280);
 			format.setInteger(MediaFormat.KEY_HEIGHT, 720);
-			format.setInteger("max-width", 1280);
-			format.setInteger("max-height", 720);
-			format.setInteger("push-blank-buffers-on-shutdown", 1);
+			format.setInteger(MediaFormat.KEY_MAX_WIDTH, 1280);
+			format.setInteger(MediaFormat.KEY_MAX_HEIGHT, 720);
+			format.setInteger(MediaFormat.KEY_PUSH_BLANK_BUFFERS_ON_STOP, 1);
 			decoder = MediaCodec.createDecoderByType("video/avc");
 			decoder.configure(format, surface, null, 0);
 
@@ -74,12 +75,11 @@ public class Decoder{
 			ByteBuffer[] inputBuffers = decoder.getInputBuffers();
 			ByteBuffer[] outputBuffers = decoder.getOutputBuffers();
 			BufferInfo info = new BufferInfo();
-			
-			while (!Thread.interrupted()&&!inputStream.isEOS()) {
-				if (!inputStream.isEmpty()) {
 
+			while (!Thread.interrupted() && !inputStream.isEOS()) {
+				if (!inputStream.isEmpty()) {
 					int inIndex = decoder.dequeueInputBuffer(100);
-					//Log.d("DecodeActivity", "inIndex: " + inIndex);
+					// Log.d("DecodeActivity", "inIndex: " + inIndex);
 					if (inIndex >= 0) {
 						ByteBuffer buffer = inputBuffers[inIndex];//
 						int sampleSize = readSampleData(buffer);//
@@ -87,13 +87,12 @@ public class Decoder{
 							Log.d("DecodeActivity", "InputBuffer BUFFER_FLAG_END_OF_STREAM");
 							decoder.queueInputBuffer(inIndex, 0, 0, 0, MediaCodec.BUFFER_FLAG_END_OF_STREAM);
 						} else if (sampleSize > 0) {
-							//Log.d("DecodeActivity", "sampleSize>0");
-							if (pts == 0) {
+							// Log.d("DecodeActivity", "sampleSize>0");
+							if (pts == 0)
 								decoder.queueInputBuffer(inIndex, 0, sampleSize, pts,
 										MediaCodec.BUFFER_FLAG_CODEC_CONFIG);
-							} else {
+							else
 								decoder.queueInputBuffer(inIndex, 0, sampleSize, pts, 0);
-							}
 							pts++;
 						}
 					}
@@ -124,24 +123,22 @@ public class Decoder{
 					break;
 				}
 			}
-
 			decoder.stop();
 			decoder.release();
-			// extractor.release();
 		}
 	}
 
 	int readSampleData(ByteBuffer buffer) {
-		if(inputStream.isEOS())
+		if (inputStream.isEOS())
 			return -1;
 		if (!inputStream.isEmpty()) {
 			byte[] sampleData = inputStream.getQueue().poll();
 			buffer.clear();
 			buffer.put(sampleData);
-			//Log.d("DecodeActivity", "readSampleData");
+			// Log.d("DecodeActivity", "readSampleData");
 			return sampleData.length;
 		}
-		//Log.d("DecodeActivity", "Try readSampleData1");
+		// Log.d("DecodeActivity", "Try readSampleData1");
 		return 0;
 	}
 

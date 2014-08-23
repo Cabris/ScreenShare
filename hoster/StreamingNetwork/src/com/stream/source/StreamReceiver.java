@@ -16,6 +16,7 @@ public class StreamReceiver extends StreamSource {
 	String ipAddress;
 	int port;
 	InputStream inputStream;
+	BufferedInputStream bStream;
 	boolean isEof;
 	ReceiveThread receiveThread;
 
@@ -26,11 +27,9 @@ public class StreamReceiver extends StreamSource {
 	protected int targetLength = 0;
 	protected int currentLength = 0;
 	int maxBufferSize = 10000000;
-	BufferedInputStream inFromServer;
 
-	
 	private static Logger log = Logger.getLogger(StreamReceiver.class.getName());
-	
+
 	public StreamReceiver(String ip, int port) {
 		this.ipAddress = ip;
 		this.port = port;
@@ -44,6 +43,8 @@ public class StreamReceiver extends StreamSource {
 
 	public void onDestory() {
 		try {
+			inputStream.close();
+			bStream.close();
 			clientSocket.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,15 +58,16 @@ public class StreamReceiver extends StreamSource {
 	}
 
 	byte[] lengthData = new byte[4];
+
 	protected void updateLength() throws Exception {
 		lengthBuffer.clear();
 		int haveRead = 0;
 		while (true) {
-			int bytesRead = inputStream.read(lengthData,0,4-haveRead);
+			int bytesRead = bStream.read(lengthData, 0, 4 - haveRead);
 			if (bytesRead > 0) {
 				lengthBuffer.put(lengthData, 0, bytesRead);
 				haveRead += bytesRead;
-				log.info("fill targetLength: "+haveRead+"/"+4);
+				log.info("fill targetLength: " + haveRead + "/" + 4);
 			}
 			if (haveRead == lengthData.length)
 				break;
@@ -73,27 +75,28 @@ public class StreamReceiver extends StreamSource {
 		lengthBuffer.flip();
 		lengthBuffer.get(lengthData);
 		targetLength = BitConverter2.toInt(lengthData);
-		log.info("update targetLength: "+  targetLength);
-		if(targetLength<0)
+		log.info("update targetLength: " + targetLength);
+		if (targetLength < 0)
 			throw new Exception("negi length");
 	}
-	
+
 	byte[] fillInBuffer = new byte[maxBufferSize];
+
 	protected void fillBuffer() throws Exception {
-		currentLength=0;
+		currentLength = 0;
 		frameBuffer.clear();
-		while(true){
-			int bytesRead = inputStream.read(fillInBuffer,0,targetLength-currentLength);
-			if(bytesRead>0){
-				frameBuffer.put(fillInBuffer,0,bytesRead);
-				currentLength+=bytesRead;
-				log.info("fill:"+currentLength+"/"+targetLength);
+		while (true) {
+			int bytesRead = bStream.read(fillInBuffer, 0, targetLength - currentLength);
+			if (bytesRead > 0) {
+				frameBuffer.put(fillInBuffer, 0, bytesRead);
+				currentLength += bytesRead;
+				log.info("fill:" + currentLength + "/" + targetLength);
 			}
-			if(currentLength==targetLength)
+			if (currentLength == targetLength)
 				break;
 		}
-		log.info("fill finished:"+currentLength+"/"+targetLength);
-		byte[] data=new byte[targetLength];
+		log.info("fill finished:" + currentLength + "/" + targetLength);
+		byte[] data = new byte[targetLength];
 		frameBuffer.flip();
 		frameBuffer.get(data);
 		gotPacket(data);
@@ -146,8 +149,17 @@ public class StreamReceiver extends StreamSource {
 	}
 
 	private boolean isMatch(byte[] packet, byte[] uselessCode, int i) {
-		return packet[i - 3] != 0x0 && packet[i - 2] == uselessCode[0] && packet[i - 1] == uselessCode[1]
-				&& packet[i - 0] == uselessCode[2];
+		boolean isMatch = true;
+		for (int j = 0; j < uselessCode.length; j++) {// 0-2
+			isMatch = isMatch && packet[i - j] == uselessCode[uselessCode.length-1 - j];
+		}
+		isMatch = isMatch && packet[i - 3] != 0x0;
+
+		return isMatch;
+//		return packet[i - 3] != 0x0 && 
+//				packet[i - 2] == uselessCode[0] && 
+//				packet[i - 1] == uselessCode[1]&& 
+//				packet[i - 0] == uselessCode[2];
 	}
 
 	private class ReceiveThread extends Thread {
@@ -169,14 +181,14 @@ public class StreamReceiver extends StreamSource {
 				clientSocket = new Socket(ipAddress, port);
 				clientSocket.setTcpNoDelay(true);
 				inputStream = clientSocket.getInputStream();
-				inFromServer = new BufferedInputStream(inputStream);
+				bStream = new BufferedInputStream(inputStream);
 				while (!Thread.interrupted()) {
 					updateLength();
 					fillBuffer();
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-			}finally{
+			} finally {
 				onDestory();
 			}
 		}

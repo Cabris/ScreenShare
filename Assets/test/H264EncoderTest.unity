@@ -19241,6 +19241,7 @@ MonoBehaviour:
   source: {fileID: 801361980}
   outWidth: 800
   outHeight: 480
+  isSameAsSource: 0
   fps: 30
   bitRate: 800000
   blocking: 0
@@ -39686,7 +39687,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400008, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
       propertyPath: bitRate
-      value: 800000
+      value: 900000
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
+      propertyPath: outWidth
+      value: 320
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
+      propertyPath: outHeight
+      value: 240
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
+      propertyPath: isSameAsSource
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
@@ -41415,10 +41428,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 1831905684}
-  outWidth: 800
-  outHeight: 480
+  outWidth: 320
+  outHeight: 240
+  isSameAsSource: 1
   fps: 60
-  bitRate: 800000
+  bitRate: 900000
   blocking: 0
 --- !u!114 &1831905684
 MonoBehaviour:

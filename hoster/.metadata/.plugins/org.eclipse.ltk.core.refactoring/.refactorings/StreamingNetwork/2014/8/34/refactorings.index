@@ -5,3 +5,4 @@
 1408672132239	Rename field 'byteBuffer'
 1408672987287	Rename local variable 'readed'
 1408673002297	Rename local variable 'read'
+1408749204563	Rename field 'inFromServer'

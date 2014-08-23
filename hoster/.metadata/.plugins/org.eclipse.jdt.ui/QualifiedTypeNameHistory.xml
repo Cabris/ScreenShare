@@ -47,4 +47,6 @@
 <fullyQualifiedTypeName name="java.lang.Thread"/>
 <fullyQualifiedTypeName name="java.nio.ByteBuffer"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="java.lang.Boolean"/>
+<fullyQualifiedTypeName name="android.media.MediaFormat"/>
 </qualifiedTypeNameHistroy>
