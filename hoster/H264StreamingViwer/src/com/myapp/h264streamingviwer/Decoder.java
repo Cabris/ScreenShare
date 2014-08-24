@@ -100,19 +100,18 @@ public class Decoder {
 					int outIndex = decoder.dequeueOutputBuffer(info, 100);
 					switch (outIndex) {
 					case MediaCodec.INFO_OUTPUT_BUFFERS_CHANGED:
-						Log.d("DecodeActivity", "INFO_OUTPUT_BUFFERS_CHANGED");
+						//Log.d("DecodeActivity", "INFO_OUTPUT_BUFFERS_CHANGED");
 						outputBuffers = decoder.getOutputBuffers();
 						break;
 					case MediaCodec.INFO_OUTPUT_FORMAT_CHANGED:
-						Log.d("DecodeActivity", "New format " + decoder.getOutputFormat());
+						//Log.d("DecodeActivity", "New format " + decoder.getOutputFormat());
 						break;
 					case MediaCodec.INFO_TRY_AGAIN_LATER:
-						Log.d("DecodeActivity", "dequeueOutputBuffer timed out!");
+						//Log.d("DecodeActivity", "dequeueOutputBuffer timed out!");
 						break;
 					default:
-						ByteBuffer buffer = outputBuffers[outIndex];
-						Log.v("DecodeActivity", "We can't use this buffer but render it due to the API limit, "
-								+ buffer);
+						//ByteBuffer buffer = outputBuffers[outIndex];
+						//Log.v("DecodeActivity", "We can't use this buffer but render it due to the API limit, "+ buffer);
 						decoder.releaseOutputBuffer(outIndex, true);
 						break;
 					}
@@ -123,6 +122,8 @@ public class Decoder {
 					break;
 				}
 			}
+			int outIndex = decoder.dequeueOutputBuffer(info, 100);
+			decoder.releaseOutputBuffer(outIndex, true);
 			decoder.stop();
 			decoder.release();
 		}
@@ -136,9 +137,9 @@ public class Decoder {
 			buffer.clear();
 			buffer.put(sampleData);
 			// Log.d("DecodeActivity", "readSampleData");
+			Log.d("DecodeActivity","size="+inputStream.getQueue().size());
 			return sampleData.length;
 		}
-		// Log.d("DecodeActivity", "Try readSampleData1");
 		return 0;
 	}
 

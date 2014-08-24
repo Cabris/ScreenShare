@@ -10,7 +10,7 @@ public class networkTest : MonoBehaviour {
 	private TcpListener tcpListener;
 	private Thread listenThread;
 	List<TcpClient> clients=new List<TcpClient>();
-	Timer t;
+	//Timer t;
 	int length=0;
 	[SerializeField]
 	int fps;
@@ -18,15 +18,25 @@ public class networkTest : MonoBehaviour {
 	int clientSize;
 	
 	System.Object obj;
-	
+
+	TimerTest tt;
+
 	// Use this for initialization
 	void Start () {
 		this.tcpListener = new TcpListener(IPAddress.Any, 8888);
 		this.listenThread = new Thread(new ThreadStart(ListenForClients));
 		this.listenThread.Start();
 		obj=this;
+		tt=new TimerTest();
+		tt.Start();
+//		t=new Timer(new TimerCallback(Send2));
+//		t.Change(0,1000/fps);
 	}
-	
+
+	void Send2(object s){
+		Debug.Log("s");
+	}
+
 	// Update is called once per frame
 	void Update () {
 		clientSize=clients.Count;
@@ -46,7 +56,7 @@ public class networkTest : MonoBehaviour {
 			string s= String.Format("IP Address {0}: {1} ", i, IpA[i].ToString ());
 			Debug.Log(s);
 		}
-		
+
 		while (true){
 			//blocks until a client has connected to the server
 			TcpClient client = this.tcpListener.AcceptTcpClient();
@@ -65,8 +75,7 @@ public class networkTest : MonoBehaviour {
 		tcpClient.NoDelay=true;
 		tcpClient.SendBufferSize=80000;
 		clients.Add(tcpClient);
-		t=new Timer(new TimerCallback(Send));
-		t.Change(0,1000/fps);
+
 	}
 	
 	void Send(object s){
@@ -88,7 +97,9 @@ public class networkTest : MonoBehaviour {
 	}
 	
 	public void onDestory(){
-		t.Change(Timeout.Infinite,Timeout.Infinite);
+		tt.Stop();
+//		t.Change(Timeout.Infinite,Timeout.Infinite);
+//		t.Dispose();
 		foreach(TcpClient c in clients)
 			c.Close();
 		tcpListener.Stop();

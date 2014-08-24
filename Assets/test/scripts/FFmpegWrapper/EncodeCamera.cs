@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Text;
-using System.Threading;
+using System.Timers;
 using System;
 public class EncodeCamera : MonoBehaviour {
-	
-	EncoderH264 encoder;
+
 	[SerializeField]
 	CameraSource source;
 	[SerializeField]
@@ -16,11 +15,15 @@ public class EncodeCamera : MonoBehaviour {
 	int fps;
 	[SerializeField]
 	int bitRate;
+	[SerializeField]
+	bool isEncoding=false;
+	[SerializeField]
+	int blocking=0;
 
+	EncoderH264 encoder;
 	StreamTcpServer server;
 	long tatol=0;
-	Timer t;
-	bool isEncoding=false;
+	System.Timers.Timer timer;
 	System.Object obj;
 	// Use this for initialization
 	void Start () {
@@ -35,13 +38,15 @@ public class EncodeCamera : MonoBehaviour {
 		encoder.BitRate=bitRate;
 		encoder.Prepare();
 		server=GetComponent<StreamTcpServer>();
-		t=new Timer(new TimerCallback(Encoding));
 		obj=this;
+
+		double interval=1000.0/(double)fps;
+		timer=new System.Timers.Timer(interval);
+		timer.Elapsed+=Encoding;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
 		if(Input.GetKeyDown(KeyCode.F2)){
 			isEncoding=!isEncoding;
 			if(isEncoding)
@@ -50,19 +55,20 @@ public class EncodeCamera : MonoBehaviour {
 				stopEncoding();
 			Debug.Log("isEncoding: "+isEncoding);
 		}
-		//Debug.Log("blocking: "+blocking);
 	}
 	
+	public void CheckStatus(System.Object stateInfo)
+	{
+		Debug.Log("Encoding");
+	}
 	
 	void startEncoding(){
 		encoder.StartEncoder();
-		int period=1000/fps;
-		t.Change(0,period);
+		timer.Start();
 		isEncoding=true;
 	}
-	[SerializeField]
-	int blocking=0;
-	void  Encoding(object state){
+
+	void  Encoding(object source, ElapsedEventArgs e){
 		blocking++;
 		lock(obj){
 			if(isEncoding){
@@ -77,14 +83,14 @@ public class EncodeCamera : MonoBehaviour {
 	
 	void stopEncoding(){
 		isEncoding=false;
-		t.Change(Timeout.Infinite,Timeout.Infinite);
-		encoder.StopEncoder();//dead
-		t.Dispose();
+		timer.Stop();
+		timer.Dispose();
+		encoder.StopEncoder();
 		server.onDestory();
 	}
 	
 	void OnApplicationQuit() {
-		Debug.Log("tatol: "+tatol);
 		stopEncoding();
+		Debug.Log("tatol: "+tatol);
 	}
 }

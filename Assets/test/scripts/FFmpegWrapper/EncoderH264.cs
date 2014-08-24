@@ -31,8 +31,8 @@ public class EncoderH264
 	bool isStoped=false;
 	
 	Object obj;
-	
 	UnityEngine.Color32[] colors;
+	bool debug=false;
 	
 	public EncoderH264 (ConcurrentStack<UnityEngine.Color32[]>  buffer,UnityEngine.Texture2D sourceTexture)
 	{
@@ -41,11 +41,13 @@ public class EncoderH264
 		srcH=sourceTexture.height;
 		obj=this;
 	}
-	//FileStream fs;
+	FileStream fs;
 	public void Prepare(){
 		colors=null;
-		//string path = @"MyTest_h264.mp4";
-		//fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Write);
+		if(debug){
+			string path = @"MyTest_h264.mp4";
+			fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Write);
+		}
 		
 		src = new byte[srcW * srcH*3];
 		src_size = src.Length;
@@ -62,9 +64,9 @@ public class EncoderH264
 	public void StartEncoder(){
 		lock(obj){
 			try{
-			startEncoder(srcW, srcH, outWidth, outHeight, bitRate, fps);
-			stopWatch.Start();
-			isStarted=true;
+				startEncoder(srcW, srcH, outWidth, outHeight, bitRate, fps);
+				stopWatch.Start();
+				isStarted=true;
 			}catch(Exception e){
 				UnityEngine.Debug.LogException(e);
 			}
@@ -84,7 +86,8 @@ public class EncoderH264
 					Marshal.Copy(decP, dec, 0, dec_size);
 					encoded=new byte[dec_size];
 					Buffer.BlockCopy(dec,0,encoded,0,dec_size);
-					//fs.Write(dec, 0, dec_size);
+					if(debug)
+						fs.Write(dec, 0, dec_size);
 				}
 				else
 				{
@@ -103,9 +106,11 @@ public class EncoderH264
 				return;
 			isStoped=true;
 			//timer.Change(Timeout.Infinite,Timeout.Infinite);
-			byte[] endcode = new byte[]{ 0, 0, 1, 0xb7 };
-			//fs.Write(endcode, 0, endcode.Length);
-			//fs.Close();
+			if(debug){
+				byte[] endcode = new byte[]{ 0, 0, 1, 0xb7 };
+				fs.Write(endcode, 0, endcode.Length);
+				fs.Close();
+			}
 			Marshal.FreeHGlobal(srcP);
 			Marshal.FreeHGlobal(decP);
 			

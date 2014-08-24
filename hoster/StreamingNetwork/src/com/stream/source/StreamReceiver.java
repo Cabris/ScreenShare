@@ -60,6 +60,7 @@ public class StreamReceiver extends StreamSource {
 	byte[] lengthData = new byte[4];
 
 	protected void updateLength() throws Exception {
+		int tryCount=0;
 		lengthBuffer.clear();
 		int haveRead = 0;
 		while (true) {
@@ -67,10 +68,11 @@ public class StreamReceiver extends StreamSource {
 			if (bytesRead > 0) {
 				lengthBuffer.put(lengthData, 0, bytesRead);
 				haveRead += bytesRead;
-				log.info("fill targetLength: " + haveRead + "/" + 4);
+				log.info("fill targetLength: " + haveRead + "/" + 4+",try: "+tryCount);
 			}
 			if (haveRead == lengthData.length)
 				break;
+			tryCount++;
 		}
 		lengthBuffer.flip();
 		lengthBuffer.get(lengthData);
@@ -83,6 +85,7 @@ public class StreamReceiver extends StreamSource {
 	byte[] fillInBuffer = new byte[maxBufferSize];
 
 	protected void fillBuffer() throws Exception {
+		int tryCount=0;
 		currentLength = 0;
 		frameBuffer.clear();
 		while (true) {
@@ -90,10 +93,11 @@ public class StreamReceiver extends StreamSource {
 			if (bytesRead > 0) {
 				frameBuffer.put(fillInBuffer, 0, bytesRead);
 				currentLength += bytesRead;
-				log.info("fill:" + currentLength + "/" + targetLength);
+				log.info("fill:" + currentLength + "/" + targetLength+",try: "+tryCount);
 			}
 			if (currentLength == targetLength)
 				break;
+			tryCount++;
 		}
 		log.info("fill finished:" + currentLength + "/" + targetLength);
 		byte[] data = new byte[targetLength];
@@ -156,10 +160,6 @@ public class StreamReceiver extends StreamSource {
 		isMatch = isMatch && packet[i - 3] != 0x0;
 
 		return isMatch;
-//		return packet[i - 3] != 0x0 && 
-//				packet[i - 2] == uselessCode[0] && 
-//				packet[i - 1] == uselessCode[1]&& 
-//				packet[i - 0] == uselessCode[2];
 	}
 
 	private class ReceiveThread extends Thread {
@@ -180,6 +180,7 @@ public class StreamReceiver extends StreamSource {
 			try {
 				clientSocket = new Socket(ipAddress, port);
 				clientSocket.setTcpNoDelay(true);
+				clientSocket.setReceiveBufferSize(60000);
 				inputStream = clientSocket.getInputStream();
 				bStream = new BufferedInputStream(inputStream);
 				while (!Thread.interrupted()) {
