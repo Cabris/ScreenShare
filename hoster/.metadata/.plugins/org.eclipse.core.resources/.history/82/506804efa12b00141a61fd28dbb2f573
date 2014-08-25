@@ -1,0 +1,21 @@
+package com.myapp.h264streamingviwer;
+
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
+
+public class SensorClient extends Thread {
+	private SensorManager mSensorManager;
+	private Sensor mSensor;
+	
+	public SensorClient(Context context) {
+		mSensorManager = (SensorManager) getSystemService(context.SENSOR_SERVICE);
+		mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+	}
+
+	@Override
+	public void run() {
+		super.run();
+	}
+	
+}

@@ -1,0 +1,42 @@
+package com.myapp.h264streamingviwer;
+
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+
+public class SensorClient extends Thread implements SensorEventListener{
+	private SensorManager sManager;
+	//private Sensor mSensor;
+	
+	
+	public SensorClient(Context context) {
+		sManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+		//sManager.registerListener(this, sManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),SensorManager.SENSOR_DELAY_FASTEST); 
+		//mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+		
+	}
+
+	@Override
+	public void run() {
+		super.run();
+		while (true) {
+			
+		}
+	}
+
+	@Override
+	public void onSensorChanged(SensorEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
+}

@@ -1,0 +1,5 @@
+package com.myapp.h264streamingviwer;
+
+public class SensorClient extends Thread{
+
+}

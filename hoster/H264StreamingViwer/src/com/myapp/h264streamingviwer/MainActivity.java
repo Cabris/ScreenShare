@@ -16,8 +16,8 @@ public class MainActivity extends Activity {
 
 	Decoder decoder;
 	StreamReceiver receiver;
-	FileReceiver fileReceiver;
-
+SensorClient sClient;
+	
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
 				decoder.onCreate(savedInstanceState);
 			}
 		});
-
+		sClient=new SensorClient(this);
 	}
 
 	protected void onDestroy() {
@@ -46,6 +46,7 @@ public class MainActivity extends Activity {
 			decoder.onDestroy();
 		if (receiver != null)
 			receiver.onDestory();
+		sClient.onDestroy();
 		super.onDestroy();
 	}
 

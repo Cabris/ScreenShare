@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.io.File"/>
-<fullyQualifiedTypeName name="android.app.Activity"/>
 <fullyQualifiedTypeName name="android.os.Bundle"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.Decoder"/>
 <fullyQualifiedTypeName name="java.net.Socket"/>
@@ -14,7 +13,6 @@
 <fullyQualifiedTypeName name="com.comman.BitConverter"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.concurrent.ConcurrentLinkedQueue"/>
-<fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.FileReceiver"/>
 <fullyQualifiedTypeName name="android.R.string"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.FileReceiver.readThread"/>
@@ -25,28 +23,35 @@
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.StreamReceiver.ReceiveThread"/>
 <fullyQualifiedTypeName name="android.view.Window"/>
 <fullyQualifiedTypeName name="com.example.h264streamingviwer.R.layout"/>
-<fullyQualifiedTypeName name="com.example.h264streamingviwer.R"/>
 <fullyQualifiedTypeName name="android.widget.Button"/>
 <fullyQualifiedTypeName name="android.view.View"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.MainActivity.onConnect"/>
-<fullyQualifiedTypeName name="android.widget.TextView"/>
 <fullyQualifiedTypeName name="android.widget.EdgeEffect"/>
 <fullyQualifiedTypeName name="android.widget.EditText"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="android.R.integer"/>
 <fullyQualifiedTypeName name="android.view.SurfaceView"/>
-<fullyQualifiedTypeName name="com.example.h264streamingviwer.R.id"/>
 <fullyQualifiedTypeName name="com.stream.source.StreamSource"/>
 <fullyQualifiedTypeName name="com.stream.source.FileReceiver"/>
 <fullyQualifiedTypeName name="java.io.BufferedInputStream"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="com.comman.BitConverter2"/>
 <fullyQualifiedTypeName name="com.test.LacalTest"/>
 <fullyQualifiedTypeName name="com.stream.source.StreamReceiver"/>
-<fullyQualifiedTypeName name="java.lang.Thread"/>
 <fullyQualifiedTypeName name="java.nio.ByteBuffer"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="java.lang.Boolean"/>
 <fullyQualifiedTypeName name="android.media.MediaFormat"/>
+<fullyQualifiedTypeName name="java.lang.Thread"/>
+<fullyQualifiedTypeName name="android.hardware.Sensor"/>
+<fullyQualifiedTypeName name="android.hardware.SensorManager"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="android.hardware.SensorEvent"/>
+<fullyQualifiedTypeName name="android.hardware.SensorEventListener"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="com.myapp.h264streamingviwer.SensorClient"/>
+<fullyQualifiedTypeName name="android.widget.TextView"/>
+<fullyQualifiedTypeName name="android.app.Activity"/>
+<fullyQualifiedTypeName name="com.example.h264streamingviwer.R"/>
+<fullyQualifiedTypeName name="com.example.h264streamingviwer.R.id"/>
 </qualifiedTypeNameHistroy>

@@ -1,0 +1,15 @@
+package com.myapp.h264streamingviwer;
+
+import android.hardware.Sensor;
+
+public class SensorClient extends Thread {
+	public SensorClient() {
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		super.run();
+	}
+	
+}
