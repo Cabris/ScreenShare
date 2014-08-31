@@ -1,0 +1,23 @@
+ Forces + Simulations Instructions:
+ 
+ //Set a Global force:
+ 
+ 1. Create an empty GameObject and add the force of your preference through: Component/Forces/Global/DirectionalForce
+ 
+ 2. In Global forces you can add any other component as Collider,Rigidbody,MeshRenderer... in order to create your
+ simulation.(See the example scenes)
+ 
+ 3. Set the variables and start your game.
+ (In order to interact with GameObjects you have to  tag your objects and then write the name of your tag in the variable of the Force)
+ (Follow the example scenes)
+ 
+ 
+ //Set a Local force:
+ 
+ 1. Create a GameObject and add the force of your preference through: Component/Forces/Local/PlanetShericalForce
+ (Don't miss to visit the example scenes)
+ 
+ 2. In Local forces the scripts are applied to the objects and you have to set the Force object in the variable.
+ 
+ 
+ 
