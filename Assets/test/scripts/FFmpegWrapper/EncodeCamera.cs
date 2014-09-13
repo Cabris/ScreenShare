@@ -56,7 +56,7 @@ public class EncodeCamera : MonoBehaviour {
 			Debug.Log("isEncoding: "+isEncoding);
 		}
 	}
-	
+
 	public void CheckStatus(System.Object stateInfo)
 	{
 		Debug.Log("Encoding");

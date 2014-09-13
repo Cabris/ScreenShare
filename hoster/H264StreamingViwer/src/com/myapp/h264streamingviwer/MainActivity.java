@@ -1,6 +1,7 @@
 package com.myapp.h264streamingviwer;
 
 import com.example.h264streamingviwer.R;
+import com.simpleMessage.sender.MessageSender;
 import com.stream.source.FileReceiver;
 import com.stream.source.StreamReceiver;
 
@@ -16,8 +17,8 @@ public class MainActivity extends Activity {
 
 	Decoder decoder;
 	StreamReceiver receiver;
-SensorClient sClient;
-	
+	SensorClient sClient;
+	MessageSender sender;
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,9 +37,12 @@ SensorClient sClient;
 				receiver.Connect();
 				decoder = new Decoder(surfaceView, receiver);
 				decoder.onCreate(savedInstanceState);
+				sender=new MessageSender(adrs, 8887);
+				sClient=new SensorClient(MainActivity.this,sender);
+				sClient.onStart();
+				sender.connect();
 			}
 		});
-		sClient=new SensorClient(this);
 	}
 
 	protected void onDestroy() {
@@ -47,6 +51,7 @@ SensorClient sClient;
 		if (receiver != null)
 			receiver.onDestory();
 		sClient.onDestroy();
+		sender.onDestroy();
 		super.onDestroy();
 	}
 

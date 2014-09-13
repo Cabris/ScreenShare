@@ -1,0 +1,54 @@
+package com.simpleMessage.sender;
+
+import java.io.OutputStreamWriter;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+
+public class MessageSender {
+	private String address = "127.0.0.1";// 連線的ip
+    private int port = 8765;// 連線的port
+	Socket client;
+	SendThread sendThread;
+	OutputStreamWriter outputWriter;
+	public MessageSender(String address,int port){
+		this.address=address;
+		this.port=port;
+		client=new Socket();
+	}
+	
+	public void connect() {
+		sendThread=new SendThread();
+		sendThread.start();
+	}
+	
+	public void send(String data) {
+		
+	}
+	
+	public class SendThread extends Thread{
+		
+		public SendThread(){}
+		
+		@Override
+		public void run() {
+			super.run();
+			InetSocketAddress isa = new InetSocketAddress(address, port);
+	        try {
+	            client.connect(isa);
+	            outputWriter=new OutputStreamWriter(client.getOutputStream());
+	            for (int i = 0; i < 100; i++) {
+					String aString="a: "+i+"\n";
+					outputWriter.write(aString);
+				}
+	            outputWriter.flush();
+	            outputWriter.close();
+	            client.close();
+	        } catch (java.io.IOException e) {
+	            System.out.println("Socket連線有問題 !");
+	            System.out.println("IOException :" + e.toString());
+	        }
+		}
+		
+	}
+	
+}

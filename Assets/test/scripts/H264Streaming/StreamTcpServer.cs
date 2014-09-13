@@ -27,7 +27,7 @@ public class StreamTcpServer : MonoBehaviour {
 	
 	void ListenForClients()
 	{
-		Debug.Log("ListenForClients0");
+		//Debug.Log("ListenForClients0");
 		this.tcpListener.Start();
 		string ip=((IPEndPoint)tcpListener.LocalEndpoint).Address.ToString();
 		//Debug.Log("ListenForClients1: "+ip);
@@ -37,19 +37,19 @@ public class StreamTcpServer : MonoBehaviour {
 		for (int i = 0; i < IpA.Length; i++) 
 		{ 
 			string s= String.Format("IP Address {0}: {1} ", i, IpA[i].ToString ());
-			Debug.Log(s);
+			//Debug.Log(s);
 		}
 
 		while (true){
 			//blocks until a client has connected to the server
 			TcpClient client = this.tcpListener.AcceptTcpClient();
-			Debug.Log("client:"+clients.Count);
+			Debug.Log("StreamTcpServer client:"+clients.Count);
 			ParameterizedThreadStart tStart=new ParameterizedThreadStart(HandleClientComm);
 			//Thread clientThread=new Thread(tStart);
 			//clientThread.Start(client);
 			HandleClientComm(client);
 			break;
-			Debug.Log("client");
+			//Debug.Log("client");
 		}
 		
 	}

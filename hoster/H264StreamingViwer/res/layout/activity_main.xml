@@ -43,30 +43,6 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/h_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/p_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/r_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
         <SurfaceView
             android:id="@+id/surface"
             android:layout_width="match_parent"

@@ -123,9 +123,14 @@ public class Decoder {
 				}
 			}
 			int outIndex = decoder.dequeueOutputBuffer(info, 100);
-			decoder.releaseOutputBuffer(outIndex, true);
-			decoder.stop();
-			decoder.release();
+			try {
+				decoder.releaseOutputBuffer(outIndex, true);
+				decoder.stop();
+				decoder.release();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
