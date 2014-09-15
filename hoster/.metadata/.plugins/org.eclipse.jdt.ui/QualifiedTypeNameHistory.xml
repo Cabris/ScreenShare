@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.io.InputStreamReader"/>
-<fullyQualifiedTypeName name="java.io.InputStream"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.StreamReceiver"/>
 <fullyQualifiedTypeName name="android.nfc.cardemulation.OffHostApduService"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.StreamReceiver.SubThread"/>
@@ -48,16 +46,18 @@
 <fullyQualifiedTypeName name="java.lang.Thread"/>
 <fullyQualifiedTypeName name="com.simpleMessage.sender.MessageSender.SendThread"/>
 <fullyQualifiedTypeName name="java.io.OutputStreamWriter"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
-<fullyQualifiedTypeName name="android.R.string"/>
 <fullyQualifiedTypeName name="com.simpleMessage.sender.MessageSender"/>
 <fullyQualifiedTypeName name="android.app.DownloadManager.Query"/>
 <fullyQualifiedTypeName name="java.util.concurrent.ConcurrentLinkedQueue"/>
 <fullyQualifiedTypeName name="android.hardware.SensorManager"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
-<fullyQualifiedTypeName name="android.hardware.SensorEventListener"/>
 <fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.SensorFusion"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.SensorFusion.IOrientationChange"/>
 <fullyQualifiedTypeName name="java.lang.Float"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="java.lang.Math"/>
+<fullyQualifiedTypeName name="android.hardware.SensorEventListener"/>
+<fullyQualifiedTypeName name="com.myapp.h264streamingviwer.BaseSensor"/>
+<fullyQualifiedTypeName name="android.R.string"/>
 </qualifiedTypeNameHistroy>

@@ -9,9 +9,9 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-public class SensorFusion implements SensorEventListener {
+public class SensorFusion extends BaseSensor {
 
-	private SensorManager mSensorManager = null;
+	
 	private Timer fuseTimer = new Timer();
 	public static final int TIME_CONSTANT = 30;
 	private float[] accMagOrientation = new float[3];
@@ -27,26 +27,26 @@ public class SensorFusion implements SensorEventListener {
 	private float timestamp;
 	private boolean initState = true;
 	public static final float FILTER_COEFFICIENT = 0.98f;
-
+	final float rad2Deg = (float) (180f / Math.PI);
 	Float[] baseFusedOrientation = new Float[3];
-	IOrientationChange orientationChange;
+	
 
 	public SensorFusion(Context context, IOrientationChange orientationChange) {
-		mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-		this.orientationChange = orientationChange;
+		super(context, orientationChange);
 	}
 
 	public void strat() {
+		super.strat();
 		initListeners();
 		fuseTimer.scheduleAtFixedRate(new calculateFusedOrientationTask(), 10, TIME_CONSTANT);
 	}
 
 	public void destroy() {
-		mSensorManager.unregisterListener(this);
+		super.destroy();
 		fuseTimer.cancel();
 	}
 
-	public void initListeners() {
+	private void initListeners() {
 		mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
 				SensorManager.SENSOR_DELAY_FASTEST);
 
@@ -272,22 +272,22 @@ public class SensorFusion implements SensorEventListener {
 			for (int i = 0; i < 3; i++) {
 				if (baseFusedOrientation[i] == null)
 					baseFusedOrientation[i] = fusedOrientation[i];
+				baseFusedOrientation[i] = 0f;
 			}
-			float azimuth = fusedOrientation[0] - baseFusedOrientation[0];
-			float pitch = fusedOrientation[1] - baseFusedOrientation[1];
-			float roll = fusedOrientation[2] - baseFusedOrientation[2];
-			
+			float azimuth = (fusedOrientation[0] - baseFusedOrientation[0]) * rad2Deg;
+			float pitch = (fusedOrientation[1] - baseFusedOrientation[1]) * rad2Deg;
+			float roll = (fusedOrientation[2] - baseFusedOrientation[2]) * rad2Deg;
+			float[] values = new float[] { azimuth, pitch, roll };
+
 			if (orientationChange != null)
-				orientationChange.onOrientationChange(azimuth, pitch, roll);
+				orientationChange.onOrientationChange(values);
 		}
 	}
 
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
-	}
+		// TODO Auto-generated method stub
 
-	public interface IOrientationChange {
-		public void onOrientationChange(float azimuth, float pitch, float roll);
 	}
 
 }

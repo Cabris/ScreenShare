@@ -1,0 +1,5 @@
+package com.myapp.h264streamingviwer;
+
+public abstract class BaseSensor {
+
+}

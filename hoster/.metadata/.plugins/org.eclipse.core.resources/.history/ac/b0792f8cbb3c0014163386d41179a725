@@ -1,0 +1,5 @@
+package com.myapp.h264streamingviwer;
+
+public class OrientationSensor implements SensorEventListener{
+
+}

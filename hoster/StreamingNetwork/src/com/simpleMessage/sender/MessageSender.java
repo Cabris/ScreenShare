@@ -4,8 +4,11 @@ import java.io.OutputStreamWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.logging.Logger;
 
 public class MessageSender {
+	private static Logger log = Logger.getLogger(MessageSender.class.getName());
+	
 	private String address = "127.0.0.1";// 連線的ip
     private int port = 8765;// 連線的port
 	Socket client;
@@ -54,9 +57,12 @@ public class MessageSender {
 	            outputWriter=new OutputStreamWriter(client.getOutputStream());
 	           
 	            while (isSending) {
-					if(!queue.isEmpty())
-						outputWriter.write(queue.poll()+"\n");
-					 outputWriter.flush();
+					if(!queue.isEmpty()){
+						String dataString= queue.poll()+"\n";
+						outputWriter.write(dataString);
+						outputWriter.flush();
+						log.info("outputWriter: " +dataString);
+					 }
 	            }
 	            
 	            outputWriter.close();

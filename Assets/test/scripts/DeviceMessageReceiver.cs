@@ -7,55 +7,51 @@ using System.Threading;
 using System.IO;
 
 public class DeviceMessageReceiver : MonoBehaviour {
-
+	
 	private TcpListener tcpListener;
 	private Thread listenThread;
 	List<TcpClient> clients=new List<TcpClient>();
 	public delegate void OnClientMessage(string msg);
 	public OnClientMessage onClientMessage;
-
 	[SerializeField]
-	Quaternion rotation=Quaternion.identity;
+	Vector4 ort;
 	//Quaternion inv=Quaternion.identity;
 	public Transform test;
-	ConcurrentStack<Quaternion> deltaRotationStack=new ConcurrentStack<Quaternion>();
-
+	ConcurrentStack<Vector4> orientationStack=new ConcurrentStack<Vector4>();
+	
 	void Start () {
 		this.tcpListener = new TcpListener(IPAddress.Any, 8887);
 		this.listenThread = new Thread(new ThreadStart(ListenForClients));
 		this.listenThread.Start();
 		onClientMessage+=clientMsg;
-		rotation=test.localRotation;
 	}
 	
-
+	
 	// Update is called once per frame
 	void Update () {
-		while(deltaRotationStack.Count>0){
-			Quaternion deltaRotation=deltaRotationStack.Pop();
-			//test.localRotation*=deltaRotation;
-			//test.localRotation=deltaRotation;
-			test.rotation=Quaternion.identity;
-			test.Rotate(new Vector3(1,0,0),deltaRotation.x);
-			test.Rotate(new Vector3(0,1,0),deltaRotation.y);
-			test.Rotate(new Vector3(0,0,1),deltaRotation.z);
+		while(orientationStack.Count>0){
+			ort=orientationStack.Pop();
+			Debug.Log(ort);
+			Quaternion q=new Quaternion(ort.x,
+			                            ort.y,
+			                            ort.z,
+			                            ort.w);	
+			test.localRotation=q;
 		}
 		if(Input.GetKeyDown(KeyCode.R)){
 			Quaternion inv=Quaternion.Inverse(test.localRotation);
 			test.localRotation*=inv;
 		}
 	}
-
+	
 	void clientMsg(string msg){
-		Debug.Log(msg);
 		string[] values= msg.Split(',');
-		float x=Convert.ToSingle( values[0]);
-		float y=Convert.ToSingle( values[1]);
-		float z=Convert.ToSingle( values[2]);
-		float w=Convert.ToSingle( values[3]);
-		Quaternion deltaRotation=new Quaternion();
-		deltaRotation.Set(x,y,z,w);
-		deltaRotationStack.Push(deltaRotation);
+		float w=Convert.ToSingle( values[0]);
+		float x=Convert.ToSingle( values[1]);
+		float y=Convert.ToSingle( values[2]);
+		float z=Convert.ToSingle( values[3]);
+		Vector4 orientation=new Vector4(x,y,z,w);
+		orientationStack.Push(orientation);
 	}
 	
 	void ListenForClients()
@@ -93,16 +89,17 @@ public class DeviceMessageReceiver : MonoBehaviour {
 		tcpClient.NoDelay=true;
 		//tcpClient.SendBufferSize=60000;
 		clients.Add(tcpClient);
-		
 		StreamReader reader=new StreamReader(tcpClient.GetStream());
-		
-		while(true){
-			string msg= reader.ReadLine();
-			if(msg!=null){
-				//Debug.Log("m: "+msg);
-				if(onClientMessage!=null)
-					onClientMessage(msg);
+		try{
+			while(true){
+				string msg= reader.ReadLine();
+				if(msg!=null){
+					if(onClientMessage!=null)
+						onClientMessage(msg);
+				}
 			}
+		}catch(Exception e){
+			Debug.LogException(e);
 		}
 		
 	}

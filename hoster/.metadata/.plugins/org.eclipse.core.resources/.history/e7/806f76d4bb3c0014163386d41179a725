@@ -1,0 +1,9 @@
+package com.myapp.h264streamingviwer;
+
+import android.hardware.SensorManager;
+
+public abstract class BaseSensor {
+
+	protected SensorManager mSensorManager = null;
+	
+}

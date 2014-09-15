@@ -1,0 +1,16 @@
+package com.myapp.h264streamingviwer;
+
+import android.content.Context;
+import android.hardware.SensorManager;
+
+public abstract class BaseSensor {
+
+	protected SensorManager mSensorManager = null;
+	protected IOrientationChange orientationChange;
+	
+	public BaseSensor(Context context, IOrientationChange orientationChange){
+		mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+		this.orientationChange = orientationChange;
+	}
+	
+}

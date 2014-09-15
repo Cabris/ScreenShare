@@ -1,0 +1,26 @@
+package com.myapp.h264streamingviwer;
+
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+
+public class OrientationSensor extends BaseSensor{
+
+	
+	
+	public OrientationSensor(Context context, IOrientationChange orientationChange) {
+		super(context, orientationChange);
+	}
+
+	@Override
+	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+	}
+
+	@Override
+	public void onSensorChanged(SensorEvent event) {
+
+	}
+
+}
