@@ -14,7 +14,7 @@ public class OrientationSensor extends BaseSensor {
 	@Override
 	public void strat() {
 		super.strat();
-		mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR),
+		mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR),
 				SensorManager.SENSOR_DELAY_GAME);
 	}
 

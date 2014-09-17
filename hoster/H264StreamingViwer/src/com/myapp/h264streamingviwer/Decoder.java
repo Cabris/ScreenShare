@@ -48,7 +48,7 @@ public class Decoder {
 
 		public PlayerThread(Surface surface) {
 			this.surface = surface;
-			this.pts=0;
+			this.pts = 0;
 		}
 
 		@SuppressLint("InlinedApi")
@@ -73,62 +73,61 @@ public class Decoder {
 			decoder.start();
 
 			ByteBuffer[] inputBuffers = decoder.getInputBuffers();
-			ByteBuffer[] outputBuffers = decoder.getOutputBuffers();
+			// ByteBuffer[] outputBuffers = decoder.getOutputBuffers();
 			BufferInfo info = new BufferInfo();
+			try {
+				while (!Thread.interrupted() && !inputStream.isEOS()) {
+					if (!inputStream.isEmpty()) {
+						int inIndex = decoder.dequeueInputBuffer(100);
+						// Log.d("DecodeActivity", "inIndex: " + inIndex);
+						if (inIndex >= 0) {
+							ByteBuffer buffer = inputBuffers[inIndex];//
+							int sampleSize = readSampleData(buffer);//
+							if (sampleSize < 0) {
+								Log.d("DecodeActivity", "InputBuffer BUFFER_FLAG_END_OF_STREAM");
+								decoder.queueInputBuffer(inIndex, 0, 0, 0, MediaCodec.BUFFER_FLAG_END_OF_STREAM);
+							} else if (sampleSize > 0) {
+								// Log.d("DecodeActivity", "sampleSize>0");
+								if (pts == 0)
+									decoder.queueInputBuffer(inIndex, 0, sampleSize, pts,
+											MediaCodec.BUFFER_FLAG_CODEC_CONFIG);
+								else
+									decoder.queueInputBuffer(inIndex, 0, sampleSize, pts, 0);
+								pts++;
+							}
+						}
 
-			while (!Thread.interrupted() && !inputStream.isEOS()) {
-				if (!inputStream.isEmpty()) {
-					int inIndex = decoder.dequeueInputBuffer(100);
-					// Log.d("DecodeActivity", "inIndex: " + inIndex);
-					if (inIndex >= 0) {
-						ByteBuffer buffer = inputBuffers[inIndex];//
-						int sampleSize = readSampleData(buffer);//
-						if (sampleSize < 0) {
-							Log.d("DecodeActivity", "InputBuffer BUFFER_FLAG_END_OF_STREAM");
-							decoder.queueInputBuffer(inIndex, 0, 0, 0, MediaCodec.BUFFER_FLAG_END_OF_STREAM);
-						} else if (sampleSize > 0) {
-							// Log.d("DecodeActivity", "sampleSize>0");
-							if (pts == 0)
-								decoder.queueInputBuffer(inIndex, 0, sampleSize, pts,
-										MediaCodec.BUFFER_FLAG_CODEC_CONFIG);
-							else
-								decoder.queueInputBuffer(inIndex, 0, sampleSize, pts, 0);
-							pts++;
+						int outIndex = decoder.dequeueOutputBuffer(info, 100);
+						switch (outIndex) {
+						case MediaCodec.INFO_OUTPUT_BUFFERS_CHANGED:
+							// Log.d("DecodeActivity", "INFO_OUTPUT_BUFFERS_CHANGED");
+							// outputBuffers = decoder.getOutputBuffers();
+							break;
+						case MediaCodec.INFO_OUTPUT_FORMAT_CHANGED:
+							// Log.d("DecodeActivity", "New format " + decoder.getOutputFormat());
+							break;
+						case MediaCodec.INFO_TRY_AGAIN_LATER:
+							// Log.d("DecodeActivity", "dequeueOutputBuffer timed out!");
+							break;
+						default:
+							// ByteBuffer buffer = outputBuffers[outIndex];
+							// Log.v("DecodeActivity", "We can't use this buffer but render it due to the API limit, "+ buffer);
+							decoder.releaseOutputBuffer(outIndex, true);
+							break;
 						}
 					}
-
-					int outIndex = decoder.dequeueOutputBuffer(info, 100);
-					switch (outIndex) {
-					case MediaCodec.INFO_OUTPUT_BUFFERS_CHANGED:
-						//Log.d("DecodeActivity", "INFO_OUTPUT_BUFFERS_CHANGED");
-						outputBuffers = decoder.getOutputBuffers();
-						break;
-					case MediaCodec.INFO_OUTPUT_FORMAT_CHANGED:
-						//Log.d("DecodeActivity", "New format " + decoder.getOutputFormat());
-						break;
-					case MediaCodec.INFO_TRY_AGAIN_LATER:
-						//Log.d("DecodeActivity", "dequeueOutputBuffer timed out!");
-						break;
-					default:
-						//ByteBuffer buffer = outputBuffers[outIndex];
-						//Log.v("DecodeActivity", "We can't use this buffer but render it due to the API limit, "+ buffer);
-						decoder.releaseOutputBuffer(outIndex, true);
+					// All decoded frames have been rendered, we can stop playing now
+					if ((info.flags & MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0) {
+						Log.d("DecodeActivity", "OutputBuffer BUFFER_FLAG_END_OF_STREAM");
 						break;
 					}
 				}
-				// All decoded frames have been rendered, we can stop playing now
-				if ((info.flags & MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0) {
-					Log.d("DecodeActivity", "OutputBuffer BUFFER_FLAG_END_OF_STREAM");
-					break;
-				}
-			}
-			int outIndex = decoder.dequeueOutputBuffer(info, 100);
-			try {
+				int outIndex = decoder.dequeueOutputBuffer(info, 100);
+
 				decoder.releaseOutputBuffer(outIndex, true);
 				decoder.stop();
 				decoder.release();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -142,7 +141,7 @@ public class Decoder {
 			buffer.clear();
 			buffer.put(sampleData);
 			// Log.d("DecodeActivity", "readSampleData");
-			Log.d("DecodeActivity","size="+inputStream.getQueue().size());
+			Log.d("DecodeActivity", "size=" + inputStream.getQueue().size());
 			return sampleData.length;
 		}
 		return 0;

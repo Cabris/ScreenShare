@@ -1,8 +1,6 @@
 package com.myapp.h264streamingviwer;
 
 import com.simpleMessage.sender.MessageSender;
-
-import android.R.string;
 import android.content.Context;
 import android.util.Log;
 
@@ -20,6 +18,8 @@ public class SensorClient implements IOrientationChange{
 	}
 
 	public void onDestroy() {
+		String exit_code="ORIENT_EXIT";
+		sender.getQueue().add(exit_code);
 		sensor.destroy();
 	}
 

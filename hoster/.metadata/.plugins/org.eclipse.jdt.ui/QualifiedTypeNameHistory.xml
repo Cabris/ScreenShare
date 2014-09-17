@@ -55,9 +55,9 @@
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.SensorFusion"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.SensorFusion.IOrientationChange"/>
 <fullyQualifiedTypeName name="java.lang.Float"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="java.lang.Math"/>
 <fullyQualifiedTypeName name="android.hardware.SensorEventListener"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.BaseSensor"/>
 <fullyQualifiedTypeName name="android.R.string"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
 </qualifiedTypeNameHistroy>

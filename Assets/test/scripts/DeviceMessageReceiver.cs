@@ -7,7 +7,8 @@ using System.Threading;
 using System.IO;
 
 public class DeviceMessageReceiver : MonoBehaviour {
-	
+
+	const string exit_code="ORIENT_EXIT";
 	private TcpListener tcpListener;
 	private Thread listenThread;
 	List<TcpClient> clients=new List<TcpClient>();
@@ -31,7 +32,7 @@ public class DeviceMessageReceiver : MonoBehaviour {
 	void Update () {
 		while(orientationStack.Count>0){
 			ort=orientationStack.Pop();
-			Debug.Log(ort);
+			//Debug.Log(ort);
 			Quaternion q=new Quaternion(ort.x,
 			                            ort.y,
 			                            ort.z,
@@ -52,6 +53,8 @@ public class DeviceMessageReceiver : MonoBehaviour {
 		float z=Convert.ToSingle( values[3]);
 		Vector4 orientation=new Vector4(x,y,z,w);
 		orientationStack.Push(orientation);
+		if (orientationStack.Count > 2)
+			orientationStack.Clear();
 	}
 	
 	void ListenForClients()
@@ -94,6 +97,10 @@ public class DeviceMessageReceiver : MonoBehaviour {
 			while(true){
 				string msg= reader.ReadLine();
 				if(msg!=null){
+					if(msg==exit_code){
+						Debug.Log("orient discont");
+						break;
+					}
 					if(onClientMessage!=null)
 						onClientMessage(msg);
 				}
