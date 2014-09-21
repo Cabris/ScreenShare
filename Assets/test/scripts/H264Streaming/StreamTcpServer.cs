@@ -57,8 +57,8 @@ public class StreamTcpServer : MonoBehaviour {
 	private void HandleClientComm(object client)
 	{
 		TcpClient tcpClient = (TcpClient)client;
-		tcpClient.NoDelay=true;
-		tcpClient.SendBufferSize=60000;
+		//tcpClient.NoDelay=true;
+		tcpClient.SendBufferSize=600000;
 		clients.Add(tcpClient);
 		BufferedStream bs=new BufferedStream(tcpClient.GetStream());
 		bStreams.Add(bs);
@@ -72,8 +72,6 @@ public class StreamTcpServer : MonoBehaviour {
 			bs.Write(lengthData, 0 , lengthData.Length); 
 			bs.Write(data, 0 , data.Length);   
 			bs.Flush();
-//			clientStream.Flush();
-//			Debug.Log("send: "+data.Length);
 			return length;
 		}          
 		return -1;
@@ -97,8 +95,10 @@ public class StreamTcpServer : MonoBehaviour {
 	public void onDestory(){
 		foreach(BufferedStream bs in bStreams)
 			bs.Close();
+		bStreams.Clear();
 		foreach(TcpClient c in clients)
 			c.Close();
+		clients.Clear();
 		tcpListener.Stop();
 		listenThread.Abort();
 	}

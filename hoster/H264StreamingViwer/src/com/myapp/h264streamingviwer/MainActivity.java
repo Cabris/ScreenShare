@@ -32,6 +32,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				String adrs = ipAddressText.getText().toString();
+				adrs="192.168.1.48";
 				int port = Integer.parseInt(portText.getText().toString());
 				receiver = new StreamReceiver(adrs, port);
 				receiver.Connect();

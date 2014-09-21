@@ -54,6 +54,7 @@ public class MessageSender {
 	        try {
 	        	client.setTcpNoDelay(true);
 	            client.connect(isa);
+	            client.setSendBufferSize(60000);
 	            outputWriter=new OutputStreamWriter(client.getOutputStream());
 	           
 	            while (isSending) {

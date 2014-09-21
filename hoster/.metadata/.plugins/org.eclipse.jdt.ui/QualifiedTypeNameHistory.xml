@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.myapp.h264streamingviwer.StreamReceiver"/>
-<fullyQualifiedTypeName name="android.nfc.cardemulation.OffHostApduService"/>
-<fullyQualifiedTypeName name="com.myapp.h264streamingviwer.StreamReceiver.SubThread"/>
-<fullyQualifiedTypeName name="com.comman.BitConverter"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.FileReceiver"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.FileReceiver.readThread"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.FileReceiver.ReadThread"/>
@@ -19,7 +14,6 @@
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.MainActivity.onConnect"/>
 <fullyQualifiedTypeName name="android.widget.EdgeEffect"/>
 <fullyQualifiedTypeName name="android.widget.EditText"/>
-<fullyQualifiedTypeName name="android.R.integer"/>
 <fullyQualifiedTypeName name="android.view.SurfaceView"/>
 <fullyQualifiedTypeName name="com.stream.source.StreamSource"/>
 <fullyQualifiedTypeName name="com.stream.source.FileReceiver"/>
@@ -27,7 +21,6 @@
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="com.comman.BitConverter2"/>
 <fullyQualifiedTypeName name="com.test.LacalTest"/>
-<fullyQualifiedTypeName name="com.stream.source.StreamReceiver"/>
 <fullyQualifiedTypeName name="java.nio.ByteBuffer"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="java.lang.Boolean"/>
@@ -43,7 +36,6 @@
 <fullyQualifiedTypeName name="java.net.Socket"/>
 <fullyQualifiedTypeName name="java.net.InetSocketAddress"/>
 <fullyQualifiedTypeName name="java.io.StringWriter"/>
-<fullyQualifiedTypeName name="java.lang.Thread"/>
 <fullyQualifiedTypeName name="com.simpleMessage.sender.MessageSender.SendThread"/>
 <fullyQualifiedTypeName name="java.io.OutputStreamWriter"/>
 <fullyQualifiedTypeName name="com.simpleMessage.sender.MessageSender"/>
@@ -60,4 +52,12 @@
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.BaseSensor"/>
 <fullyQualifiedTypeName name="android.R.string"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="java.lang.Thread"/>
+<fullyQualifiedTypeName name="javax.xml.stream.events.StartDocument"/>
+<fullyQualifiedTypeName name="com.stream.source.StreamReceiver"/>
+<fullyQualifiedTypeName name="com.stream.source.StreamingTest.TestThread"/>
+<fullyQualifiedTypeName name="com.stream.source.StreamingTest"/>
+<fullyQualifiedTypeName name="android.R.integer"/>
+<fullyQualifiedTypeName name="android.os.Handler"/>
+<fullyQualifiedTypeName name="java.lang.Runnable"/>
 </qualifiedTypeNameHistroy>

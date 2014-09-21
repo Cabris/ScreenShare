@@ -1,0 +1,15 @@
+package com.stream.source;
+
+public class StreamingTest {
+
+	StreamReceiver receiver;
+	
+	public static void main(String[] args) {
+		adrs="192.168.0.100";
+		int port = Integer.parseInt(portText.getText().toString());
+		receiver = new StreamReceiver(adrs, port);
+		receiver.Connect();
+
+	}
+
+}

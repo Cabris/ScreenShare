@@ -1,11 +1,13 @@
 package com.myapp.h264streamingviwer;
 
 import android.os.Bundle;
+import android.os.Handler;
 
 import java.nio.ByteBuffer;
 
 import com.stream.source.StreamSource;
 
+import android.R.integer;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -20,17 +22,17 @@ import android.view.SurfaceView;
 public class Decoder {
 
 	private PlayerThread mPlayer = null;
-	SurfaceView sv;
+	SurfaceView surfaceView;
 	StreamSource inputStream;
 
 	public Decoder(SurfaceView surfaceView, StreamSource input) {
-		this.sv = surfaceView;
+		this.surfaceView = surfaceView;
 		this.inputStream = input;
 	}
 
 	public void onCreate(Bundle savedInstanceState) {
 		if (mPlayer == null) {
-			mPlayer = new PlayerThread(sv.getHolder().getSurface());
+			mPlayer = new PlayerThread(surfaceView.getHolder().getSurface());
 			mPlayer.start();
 		}
 	}
@@ -66,7 +68,7 @@ public class Decoder {
 			decoder.configure(format, surface, null, 0);
 
 			if (decoder == null) {
-				Log.e("DecodeActivity", "Can't find video info!");
+				Log.e("Decoder", "Can't find video info!");
 				return;
 			}
 
@@ -84,7 +86,7 @@ public class Decoder {
 							ByteBuffer buffer = inputBuffers[inIndex];//
 							int sampleSize = readSampleData(buffer);//
 							if (sampleSize < 0) {
-								Log.d("DecodeActivity", "InputBuffer BUFFER_FLAG_END_OF_STREAM");
+								Log.d("Decoder", "InputBuffer BUFFER_FLAG_END_OF_STREAM");
 								decoder.queueInputBuffer(inIndex, 0, 0, 0, MediaCodec.BUFFER_FLAG_END_OF_STREAM);
 							} else if (sampleSize > 0) {
 								// Log.d("DecodeActivity", "sampleSize>0");
@@ -104,7 +106,10 @@ public class Decoder {
 							// outputBuffers = decoder.getOutputBuffers();
 							break;
 						case MediaCodec.INFO_OUTPUT_FORMAT_CHANGED:
-							// Log.d("DecodeActivity", "New format " + decoder.getOutputFormat());
+							MediaFormat format1 = decoder.getOutputFormat();
+							int width=format1.getInteger(MediaFormat.KEY_WIDTH);
+							int height=format1.getInteger(MediaFormat.KEY_HEIGHT);
+							handleVideoSize(width, height);
 							break;
 						case MediaCodec.INFO_TRY_AGAIN_LATER:
 							// Log.d("DecodeActivity", "dequeueOutputBuffer timed out!");
@@ -118,7 +123,7 @@ public class Decoder {
 					}
 					// All decoded frames have been rendered, we can stop playing now
 					if ((info.flags & MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0) {
-						Log.d("DecodeActivity", "OutputBuffer BUFFER_FLAG_END_OF_STREAM");
+						Log.d("Decoder", "OutputBuffer BUFFER_FLAG_END_OF_STREAM");
 						break;
 					}
 				}
@@ -133,6 +138,37 @@ public class Decoder {
 		}
 	}
 
+	void handleVideoSize(final int videoWidth ,final int videoHeight ){
+		Log.d("Decoder", "New format :" + videoWidth+", "+videoHeight );
+		
+		
+        Handler mainHandler = new Handler(surfaceView.getContext().getMainLooper());
+        
+        Runnable runnable=new Runnable() {
+			
+			@Override
+			public void run() {
+				float videoProportion = (float) videoWidth / (float) videoHeight;
+				
+				android.view.ViewGroup.LayoutParams lp = surfaceView.getLayoutParams();
+				int screenWidth = lp.width;
+		        int screenHeight = lp.height;
+		        float screenProportion = (float) screenWidth / (float) screenHeight;
+				
+				if (videoProportion > screenProportion) {
+		            lp.width = screenWidth;
+		            lp.height = (int) ((float) screenWidth / videoProportion);
+		        } else {
+		            lp.width = (int) (videoProportion * (float) screenHeight);
+		            lp.height = screenHeight;
+		        }
+				
+				surfaceView.setLayoutParams(lp);
+			}
+		};
+		mainHandler.post(runnable);
+	}
+		
 	int readSampleData(ByteBuffer buffer) {
 		if (inputStream.isEOS())
 			return -1;
@@ -141,7 +177,7 @@ public class Decoder {
 			buffer.clear();
 			buffer.put(sampleData);
 			// Log.d("DecodeActivity", "readSampleData");
-			Log.d("DecodeActivity", "size=" + inputStream.getQueue().size());
+			Log.d("Decoder", "size=" + inputStream.getQueue().size());
 			return sampleData.length;
 		}
 		return 0;

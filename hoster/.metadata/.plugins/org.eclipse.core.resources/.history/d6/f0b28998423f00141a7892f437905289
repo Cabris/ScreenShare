@@ -1,0 +1,11 @@
+package com.stream.source;
+
+public class StreamingTest {
+
+	StreamReceiver receiver;
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
