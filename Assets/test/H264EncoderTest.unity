@@ -39949,7 +39949,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400008, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
       propertyPath: bitRate
-      value: 900000
+      value: 700000
       objectReference: {fileID: 0}
     - target: {fileID: 11400008, guid: c001116c51f0d7c48b2d1733905970fd, type: 2}
       propertyPath: outWidth
@@ -41723,7 +41723,7 @@ MonoBehaviour:
   outHeight: 480
   isSameAsSource: 1
   fps: 60
-  bitRate: 900000
+  bitRate: 700000
   isEncoding: 0
   blocking: 0
 --- !u!114 &1831905684

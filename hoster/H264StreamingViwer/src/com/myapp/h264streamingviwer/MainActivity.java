@@ -24,16 +24,20 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
+		final SurfaceView surfaceView = (SurfaceView) findViewById(R.id.surface);
+		//setContentView(R.layout.connection_main);
 		Button connectButton = (Button) findViewById(R.id.connect_button);
 		final EditText ipAddressText = (EditText) findViewById(R.id.ip_editText);
 		final EditText portText = (EditText) findViewById(R.id.port_editText);
-		final SurfaceView surfaceView = (SurfaceView) findViewById(R.id.surface);
+		
 		connectButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				
 				String adrs = ipAddressText.getText().toString();
-				adrs="192.168.1.48";
+				adrs="192.168.0.112";
 				int port = Integer.parseInt(portText.getText().toString());
+				port=8888;
 				receiver = new StreamReceiver(adrs, port);
 				receiver.Connect();
 				decoder = new Decoder(surfaceView, receiver);
