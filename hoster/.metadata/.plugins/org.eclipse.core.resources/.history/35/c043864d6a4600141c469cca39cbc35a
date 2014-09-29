@@ -1,0 +1,11 @@
+package com.myapp.h264streamingviwer;
+
+import android.app.Fragment;
+
+public class VideoFragment extends Fragment {
+
+	public VideoFragment() {
+		
+	}
+
+}

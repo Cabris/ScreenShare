@@ -2,7 +2,6 @@ package com.myapp.h264streamingviwer;
 
 import com.example.h264streamingviwer.R;
 import com.simpleMessage.sender.MessageSender;
-import com.stream.source.FileReceiver;
 import com.stream.source.StreamReceiver;
 
 import android.app.Activity;
@@ -22,13 +21,20 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);//must 1sf
 		setContentView(R.layout.activity_main);
-		final SurfaceView surfaceView = (SurfaceView) findViewById(R.id.surface);
+		
+		getFragmentManager()
+        .beginTransaction()
+        .add(R.id.container, new ConnectionFragment())
+        .commit();
+		
+		
 		//setContentView(R.layout.connection_main);
 		Button connectButton = (Button) findViewById(R.id.connect_button);
 		final EditText ipAddressText = (EditText) findViewById(R.id.ip_editText);
 		final EditText portText = (EditText) findViewById(R.id.port_editText);
+		final SurfaceView surfaceView = (SurfaceView) findViewById(R.id.surface);
 		
 		connectButton.setOnClickListener(new View.OnClickListener() {
 			@Override

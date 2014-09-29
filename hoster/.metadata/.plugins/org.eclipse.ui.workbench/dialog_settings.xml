@@ -33,8 +33,8 @@
 		<item value="1|微軟正黑體|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|微軟正黑體" key="DIALOG_FONT_NAME"/>
 		<item value="com.android.ide.eclipse.ddms.views.LogCatView" key="ShowViewDialog.STORE_SELECTED_VIEW_ID"/>
 		<item value="444" key="DIALOG_HEIGHT"/>
-		<item value="803" key="DIALOG_X_ORIGIN"/>
-		<item value="232" key="DIALOG_Y_ORIGIN"/>
+		<item value="926" key="DIALOG_X_ORIGIN"/>
+		<item value="215" key="DIALOG_Y_ORIGIN"/>
 		<list key="ShowViewDialog.STORE_EXPANDED_CATEGORIES_ID">
 			<item value="com.android.ide.eclipse.ddms.views.category"/>
 		</list>
