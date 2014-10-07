@@ -41,7 +41,7 @@ public class StreamReceiver extends StreamSource {
 		receiveThread.start();
 	}
 
-	public void onDestory() {
+	public void onStop() {
 		try {
 			inputStream.close();
 			bStream.close();
@@ -190,7 +190,7 @@ public class StreamReceiver extends StreamSource {
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
-				onDestory();
+				onStop();
 			}
 		}
 	}

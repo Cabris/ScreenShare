@@ -39,7 +39,7 @@ public class MessageSender {
 		
 	}
 	
-	public void onDestroy() {
+	public void onStop() {
 		isSending=false;
 	}
 	
