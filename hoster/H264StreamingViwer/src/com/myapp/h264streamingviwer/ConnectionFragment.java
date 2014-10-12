@@ -43,7 +43,7 @@ class ConnectionFragment extends Fragment implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		String adrs = ipAddressText.getText().toString();
-		adrs = "192.168.0.100";
+		adrs = "192.168.1.48";
 		int port = Integer.parseInt(portText.getText().toString());
 		port = 8888;
 

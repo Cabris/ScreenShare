@@ -6,14 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/test/and.unity
+    path: Assets/StreamingAssets/old/and.unity
   - enabled: 0
-    path: Assets/test/pc.unity
+    path: Assets/StreamingAssets/old/pc.unity
   - enabled: 0
-    path: Assets/test/streamHosterTest.unity
+    path: Assets/StreamingAssets/old/streamHosterTest.unity
   - enabled: 0
-    path: Assets/test/streamSenderTest.unity
+    path: Assets/StreamingAssets/old/streamSenderTest.unity
   - enabled: 0
     path: Assets/test/newTest.unity
   - enabled: 1
-    path: Assets/test/H264EncoderTest.unity
+    path: Assets/StreamingAssets/H264EncoderTest.unity
