@@ -1,7 +1,6 @@
 package com.stream.source;
 
 import java.io.BufferedInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.*;
 import java.nio.ByteBuffer;

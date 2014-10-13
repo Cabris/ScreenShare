@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.myapp.h264streamingviwer.StreamReceiver.ReceiveThread"/>
 <fullyQualifiedTypeName name="android.view.Window"/>
 <fullyQualifiedTypeName name="com.example.h264streamingviwer.R.layout"/>
 <fullyQualifiedTypeName name="android.widget.Button"/>
@@ -50,7 +49,6 @@
 <fullyQualifiedTypeName name="android.os.Handler"/>
 <fullyQualifiedTypeName name="java.lang.Runnable"/>
 <fullyQualifiedTypeName name="android.view.Surface"/>
-<fullyQualifiedTypeName name="com.example.h264streamingviwer.R"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.ConnectionFragment"/>
 <fullyQualifiedTypeName name="android.R.string"/>
 <fullyQualifiedTypeName name="android.graphics.Shader.TileMode"/>
@@ -60,4 +58,6 @@
 <fullyQualifiedTypeName name="android.R.integer"/>
 <fullyQualifiedTypeName name="com.myapp.h264streamingviwer.IOnConnectedListener"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="android.R"/>
+<fullyQualifiedTypeName name="com.example.h264streamingviwer.R"/>
 </qualifiedTypeNameHistroy>

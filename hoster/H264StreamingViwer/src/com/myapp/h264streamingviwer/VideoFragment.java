@@ -36,11 +36,16 @@ public class VideoFragment extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		surfaceView = (SurfaceView) getView().findViewById(R.id.surface);
 		receiver = new StreamReceiver(ip, port);
-		receiver.Connect();
 		decoder = new Decoder(surfaceView, receiver);
-		decoder.onCreate(savedInstanceState);
 	}
 
+	@Override
+	public void onStart() {
+		super.onStart();
+		receiver.Connect();
+		decoder.onCreate();
+	}
+	
 	@Override
 	public void onDestroy() {
 		Log.d("VideoFragment", "onDestroy");

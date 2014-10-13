@@ -7,16 +7,11 @@ import java.nio.ByteBuffer;
 
 import com.stream.source.StreamSource;
 
-import android.R.integer;
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
 import android.media.MediaCodec;
 import android.media.MediaCodec.BufferInfo;
 import android.media.MediaFormat;
 import android.util.Log;
 import android.view.Surface;
-import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class Decoder {
@@ -30,7 +25,7 @@ public class Decoder {
 		this.inputStream = input;
 	}
 
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate() {
 		if (mPlayer == null) {
 			mPlayer = new PlayerThread(surfaceView.getHolder().getSurface());
 			mPlayer.start();
@@ -75,6 +70,7 @@ public class Decoder {
 				return;
 			}
 
+			//decoder.stop();
 			decoder.start();
 
 			ByteBuffer[] inputBuffers = decoder.getInputBuffers();
@@ -139,6 +135,14 @@ public class Decoder {
 				e.printStackTrace();
 			}
 		}
+	
+		@Override
+		public void interrupt() {
+			super.interrupt();
+			decoder.stop();
+			decoder.release();
+		}
+	
 	}
 
 	void handleVideoSize(final int videoWidth, final int videoHeight) {
