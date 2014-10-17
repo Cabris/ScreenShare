@@ -118,7 +118,6 @@ GameObject:
   - 33: {fileID: 3300000}
   - 64: {fileID: 6400000}
   - 23: {fileID: 2300000}
-  - 114: {fileID: 11400016}
   m_Layer: 8
   m_Name: PlaneLeft
   m_TagString: Untagged
@@ -137,7 +136,7 @@ GameObject:
   - 20: {fileID: 2000006}
   - 114: {fileID: 11400018}
   m_Layer: 0
-  m_Name: Temp
+  m_Name: VRCameraSource
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,7 +153,6 @@ GameObject:
   - 33: {fileID: 3300002}
   - 64: {fileID: 6400002}
   - 23: {fileID: 2300002}
-  - 114: {fileID: 11400020}
   m_Layer: 8
   m_Name: PlaneRight
   m_TagString: Untagged
@@ -169,7 +167,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: .93849194, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400008}
@@ -678,18 +676,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NeckPosition: {x: 0, y: .600000024, z: 0}
   EyePosition: {x: 0, y: .150000006, z: .0900000036}
---- !u!114 &11400016
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5108e8fe84541e4b8b92557f27308be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  s: {fileID: 0}
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -707,18 +693,6 @@ MonoBehaviour:
   fullScreen: 1
   stackSize: 0
   cameras: []
---- !u!114 &11400020
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5108e8fe84541e4b8b92557f27308be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  s: {fileID: 0}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

@@ -124,7 +124,16 @@ public class CameraSource : MonoBehaviour {
             string m = "resolution must be a multiple of two, width: "+width+",height: "+height;
             Exception e = new Exception (m);
             Debug.LogException (e);
-            throw e;
+			width=floorEven(width);
+			height=floorEven(height);
+            //throw e;
         }
     }
+
+	int floorEven(int value){
+		if(value%2==0)
+			return value;
+		else
+			return value-1;
+	}
 }
