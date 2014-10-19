@@ -1,33 +1,32 @@
 package com.myapp.h264streamingviwer.funcs;
 
-import android.os.Bundle;
-import android.os.Handler;
-
 import java.nio.ByteBuffer;
 
+import com.myapp.h264streamingviwer.IHandleVideoSize;
 import com.stream.source.StreamSource;
-
 import android.media.MediaCodec;
 import android.media.MediaCodec.BufferInfo;
 import android.media.MediaFormat;
 import android.util.Log;
 import android.view.Surface;
-import android.view.SurfaceView;
+import android.view.SurfaceHolder;
 
 public class Decoder {
 
 	private PlayerThread mPlayer = null;
-	SurfaceView surfaceView;
+	public IHandleVideoSize videoSize;
+	//SurfaceView surfaceView;
+	SurfaceHolder surfaceHolder;
 	StreamSource inputStream;
-
-	public Decoder(SurfaceView surfaceView, StreamSource input) {
-		this.surfaceView = surfaceView;
+	
+	public Decoder( StreamSource input) {
 		this.inputStream = input;
 	}
 
-	public void onCreate() {
+	public void onCreate(SurfaceHolder surfaceHolder) {
+		this.surfaceHolder = surfaceHolder;
 		if (mPlayer == null) {
-			mPlayer = new PlayerThread(surfaceView.getHolder().getSurface());
+			mPlayer = new PlayerThread(surfaceHolder.getSurface());
 			mPlayer.start();
 		}
 	}
@@ -88,7 +87,6 @@ public class Decoder {
 								Log.d("Decoder", "InputBuffer BUFFER_FLAG_END_OF_STREAM");
 								decoder.queueInputBuffer(inIndex, 0, 0, 0, MediaCodec.BUFFER_FLAG_END_OF_STREAM);
 							} else if (sampleSize > 0) {
-								// Log.d("DecodeActivity", "sampleSize>0");
 								if (pts == 0)
 									decoder.queueInputBuffer(inIndex, 0, sampleSize, pts,
 											MediaCodec.BUFFER_FLAG_CODEC_CONFIG);
@@ -101,14 +99,12 @@ public class Decoder {
 						int outIndex = decoder.dequeueOutputBuffer(info, 100);
 						switch (outIndex) {
 						case MediaCodec.INFO_OUTPUT_BUFFERS_CHANGED:
-							// Log.d("DecodeActivity", "INFO_OUTPUT_BUFFERS_CHANGED");
-							// outputBuffers = decoder.getOutputBuffers();
 							break;
 						case MediaCodec.INFO_OUTPUT_FORMAT_CHANGED:
 							MediaFormat format1 = decoder.getOutputFormat();
 							int width = format1.getInteger(MediaFormat.KEY_WIDTH);
 							int height = format1.getInteger(MediaFormat.KEY_HEIGHT);
-							handleVideoSize(width, height);
+							videoSize.handleVideoSize(width, height);
 							break;
 						case MediaCodec.INFO_TRY_AGAIN_LATER:
 							// Log.d("DecodeActivity", "dequeueOutputBuffer timed out!");
@@ -126,9 +122,8 @@ public class Decoder {
 						break;
 					}
 				}
-				int outIndex = decoder.dequeueOutputBuffer(info, 100);
-
-				decoder.releaseOutputBuffer(outIndex, true);
+				//int outIndex = decoder.dequeueOutputBuffer(info, 100);
+				//decoder.releaseOutputBuffer(outIndex, true);
 				decoder.stop();
 				decoder.release();
 			} catch (Exception e) {
@@ -139,40 +134,10 @@ public class Decoder {
 		@Override
 		public void interrupt() {
 			super.interrupt();
-			decoder.stop();
-			decoder.release();
+			//decoder.stop();
+			//decoder.release();
 		}
 	
-	}
-
-	void handleVideoSize(final int videoWidth, final int videoHeight) {
-		Log.d("Decoder", "New format :" + videoWidth + ", " + videoHeight);
-
-		Handler mainHandler = new Handler(surfaceView.getContext().getMainLooper());
-
-		Runnable runnable = new Runnable() {
-
-			@Override
-			public void run() {
-				float videoProportion = (float) videoWidth / (float) videoHeight;
-
-				android.view.ViewGroup.LayoutParams lp = surfaceView.getLayoutParams();
-				int screenWidth = lp.width;
-				int screenHeight = lp.height;
-				float screenProportion = (float) screenWidth / (float) screenHeight;
-
-				if (videoProportion > screenProportion) {
-					lp.width = screenWidth;
-					lp.height = (int) ((float) screenWidth / videoProportion);
-				} else {
-					lp.width = (int) (videoProportion * (float) screenHeight);
-					lp.height = screenHeight;
-				}
-
-				surfaceView.setLayoutParams(lp);
-			}
-		};
-		// mainHandler.post(runnable);
 	}
 
 	int readSampleData(ByteBuffer buffer) {

@@ -27,7 +27,8 @@ public class StreamReceiver extends StreamSource {
 	protected int currentLength = 0;
 	int maxBufferSize = 10000000;
 
-	private static Logger log = Logger.getLogger(StreamReceiver.class.getName());
+	private static Logger log = Logger
+			.getLogger(StreamReceiver.class.getName());
 
 	public StreamReceiver(String ip, int port) {
 		this.ipAddress = ip;
@@ -41,13 +42,6 @@ public class StreamReceiver extends StreamSource {
 	}
 
 	public void onStop() {
-		try {
-			inputStream.close();
-			bStream.close();
-			clientSocket.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		receiveThread.interrupt();
 	}
 
@@ -59,7 +53,7 @@ public class StreamReceiver extends StreamSource {
 	byte[] lengthData = new byte[4];
 
 	protected void updateLength() throws Exception {
-		int tryCount=0;
+		int tryCount = 0;
 		lengthBuffer.clear();
 		int haveRead = 0;
 		while (true) {
@@ -67,7 +61,8 @@ public class StreamReceiver extends StreamSource {
 			if (bytesRead > 0) {
 				lengthBuffer.put(lengthData, 0, bytesRead);
 				haveRead += bytesRead;
-				log.info("fill targetLength: " + haveRead + "/" + 4+",try: "+tryCount);
+				log.info("fill targetLength: " + haveRead + "/" + 4 + ",try: "
+						+ tryCount);
 			}
 			if (haveRead == lengthData.length)
 				break;
@@ -84,15 +79,17 @@ public class StreamReceiver extends StreamSource {
 	byte[] fillInBuffer = new byte[maxBufferSize];
 
 	protected void fillBuffer() throws Exception {
-		int tryCount=0;
+		int tryCount = 0;
 		currentLength = 0;
 		frameBuffer.clear();
 		while (true) {
-			int bytesRead = bStream.read(fillInBuffer, 0, targetLength - currentLength);
+			int bytesRead = bStream.read(fillInBuffer, 0, targetLength
+					- currentLength);
 			if (bytesRead > 0) {
 				frameBuffer.put(fillInBuffer, 0, bytesRead);
 				currentLength += bytesRead;
-				log.info("fill:" + currentLength + "/" + targetLength+",try: "+tryCount);
+				log.info("fill:" + currentLength + "/" + targetLength
+						+ ",try: " + tryCount);
 			}
 			if (currentLength == targetLength)
 				break;
@@ -132,7 +129,8 @@ public class StreamReceiver extends StreamSource {
 		}
 		try {
 			if (!(fstP > 0 && secP > 0))
-				throw new Exception("uselessCode: fstP=" + fstP + ", secP=" + secP);
+				throw new Exception("uselessCode: fstP=" + fstP + ", secP="
+						+ secP);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -154,7 +152,8 @@ public class StreamReceiver extends StreamSource {
 	private boolean isMatch(byte[] packet, byte[] uselessCode, int i) {
 		boolean isMatch = true;
 		for (int j = 0; j < uselessCode.length; j++) {// 0-2
-			isMatch = isMatch && packet[i - j] == uselessCode[uselessCode.length-1 - j];
+			isMatch = isMatch
+					&& packet[i - j] == uselessCode[uselessCode.length - 1 - j];
 		}
 		isMatch = isMatch && packet[i - 3] != 0x0;
 
@@ -178,7 +177,7 @@ public class StreamReceiver extends StreamSource {
 			super.run();
 			try {
 				clientSocket = new Socket(ipAddress, port);
-				//clientSocket.setTcpNoDelay(true);
+				// clientSocket.setTcpNoDelay(true);
 				clientSocket.setReceiveBufferSize(600000);
 				inputStream = clientSocket.getInputStream();
 				bStream = new BufferedInputStream(inputStream);
@@ -186,11 +185,12 @@ public class StreamReceiver extends StreamSource {
 					updateLength();
 					fillBuffer();
 				}
+				inputStream.close();
+				bStream.close();
+				clientSocket.close();
 			} catch (Exception e) {
 				e.printStackTrace();
-			} finally {
-				onStop();
-			}
+			} 
 		}
 	}
 

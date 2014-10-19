@@ -27,11 +27,12 @@ public class SensorClient implements IOrientationChange{
 	public void onOrientationChange(float[] values) {
 		String data="";
 		for (int i = 0; i < values.length; i++) {
-			data=data+values[i];
+			String dataString=Float.toString(values[i]);
+			data=data+dataString;
 			if(i<values.length-1)
 				data+=",";
 		}
-		Log.d("SensorClient", data);
+		//Log.d("SensorClient", data);
 		sender.getQueue().add(data);
 	}
 

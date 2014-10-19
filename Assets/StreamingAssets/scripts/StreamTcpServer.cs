@@ -77,17 +77,6 @@ public class StreamTcpServer : MonoBehaviour {
 		return -1;
 	}
 
-//	public void ForseStopClients(){
-//		foreach(TcpClient c in clients){
-//			NetworkStream clientStream = c.GetStream();
-//			int length=-1;
-//			byte[] lengthData=getBytes(length);
-//			clientStream.Write(lengthData, 0 , lengthData.Length);          
-//			clientStream.Flush();
-//			Debug.Log("ForseStopClients: "+length);
-//		}   
-//	}
-
 	byte[] getBytes(int x) {
 		return BitConverter2.getBytes(x);
 	}

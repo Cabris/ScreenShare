@@ -16,6 +16,7 @@ obj/
 *.suo
 /*.sln
 *.user
+*.mp4
 *.unityproj
 *.booproj
 hoster/.metadata
