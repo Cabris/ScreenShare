@@ -9,6 +9,8 @@ Library/
 # ===================================== #
 ExportedObj/
 obj/
+*.cache
+hoster/H264StreamingViwer/bin/
 *.svd
 *.userprefs
 /*.csproj
