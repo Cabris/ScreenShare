@@ -59,9 +59,7 @@ public class CameraSource : MonoBehaviour {
 	}
 
     void fillTexture(){
-       //yield return new WaitForEndOfFrame();
         sourceTexture.ReadPixels(size,0,0);
-        //yield return null;
     }
 
 	void Update(){
