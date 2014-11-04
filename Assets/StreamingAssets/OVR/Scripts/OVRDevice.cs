@@ -223,6 +223,20 @@ public class OVRDevice : MonoBehaviour
 		OVR_GetScreenVCenter (ref ScreenVCenter);
 		OVR_GetDistortionCoefficients( ref DistK0, ref DistK1, ref DistK2, ref DistK3);
 	
+		HResolution = 1280;
+		VResolution = 800;
+		HScreenSize = 0.14976f;
+		VScreenSize = 0.0936f;
+		EyeToScreenDistance = 0.041f;
+		LensSeparationDistance = 0.064f;
+		LeftEyeOffset = 0.032f;
+		RightEyeOffset = 0.032f;
+		ScreenVCenter = 0.0468f;
+		DistK0 = 1f;
+		DistK1 = 0.22f;
+		DistK2 = 0.24f;
+		DistK3 = 0f;
+
 		// Distortion fit parameters based on if we are using a 5" (Prototype, DK2+) or 7" (DK1) 
 		if (HScreenSize < 0.140f) 	// 5.5"
 		{
