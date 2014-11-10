@@ -19,7 +19,11 @@ public class DeviceMessageReceiver : MonoBehaviour {
 	//Quaternion inv=Quaternion.identity;
 	public Transform test;
 	ConcurrentStack<Vector4> orientationStack=new ConcurrentStack<Vector4>();
-	
+	[SerializeField]
+	EncodeCamera encodeCam;
+
+	bool isClose=false;
+
 	void Start () {
 		this.tcpListener = new TcpListener(IPAddress.Any, 8887);
 		this.listenThread = new Thread(new ThreadStart(ListenForClients));
@@ -43,6 +47,12 @@ public class DeviceMessageReceiver : MonoBehaviour {
 			Quaternion inv=Quaternion.Inverse(test.localRotation);
 			test.localRotation*=inv;
 		}
+		if(isClose){
+			encodeCam.stopEncoding();
+			isClose=false;
+		}
+
+
 	}
 	
 	void clientMsg(string msg){
@@ -99,6 +109,7 @@ public class DeviceMessageReceiver : MonoBehaviour {
 				if(msg!=null){
 					if(msg==exit_code){
 						Debug.Log("orient discont");
+						isClose=true;
 						break;
 					}
 					if(onClientMessage!=null)

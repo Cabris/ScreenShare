@@ -3,52 +3,52 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public class CameraSource : MonoBehaviour {
+public class CameraSource : ImageSource{
+
 	[SerializeField]
-	int fps;
+	protected int fps;
 	[SerializeField]
-	int width,height;
+	protected int width,height;
 	[SerializeField]
 	bool fullScreen;
 	[SerializeField]
 	int stackSize;
 	Texture2D sourceTexture;
 	Rect size;
-	public ConcurrentStack<UnityEngine.Color32[]>  BufferStack {get;private set;}
-
-    bool isCapture;
-    [SerializeField]
-    Camera[] cameras;
+	protected bool isCapture;
 
 	// Use this for initialization
 	void Awake () {
-		if(fullScreen){
-			width=Screen.width;
-			height=Screen.height;
-		}
-		isValid ();
-        isCapture=false;
-		sourceTexture=new Texture2D(width,height,TextureFormat.RGB24,false);
+		Application.targetFrameRate = -1;
 		BufferStack =new ConcurrentStack<UnityEngine.Color32[]> ();
-
+		OnSize ();
 	}
 
-    public virtual  void Start(){
-		size=new Rect(0,0,width,height);
-        cameras=GetComponentsInChildren<Camera>();
+	public void OnSize ()
+	{
+		Rect cr = camera.rect;
+		size = new Rect (cr.x * Screen.width*0, cr.y * Screen.height*0, cr.width * Screen.width, cr.height * Screen.height);
+		if (fullScreen) {
+			width = (int)size.width;
+			height = (int)size.height;
+		}
 	}
 
-	public void StartCapture(){
+    void Start(){
+		isValid ();
+		isCapture=false;
+		sourceTexture=new Texture2D(width,height,TextureFormat.RGB24,false);
+	}
+
+	public override void StartCapture(){
 		float p=1f/(float)fps;
         isCapture=true;
 		InvokeRepeating("getFrame",0,p);
-
 	}
 
-	public void StopCapture(){
+	public override void StopCapture(){
         isCapture=false;
 		CancelInvoke("getFrame");
-
 	}
 	
 	// Update is called once per frame
@@ -64,12 +64,7 @@ public class CameraSource : MonoBehaviour {
 
 	void Update(){
 		stackSize=BufferStack.Count;
-
 	}
-
-    void FixedUpdate(){
-        //StartCoroutine(fillTexture());
-    }
 
 	void OnApplicationQuit() {
 		CancelInvoke("getFrame");
@@ -77,39 +72,37 @@ public class CameraSource : MonoBehaviour {
 
 	void getFrame ()
 	{
-		//isOK = false;
 		if(BufferStack.Count>2)
 			BufferStack.Clear();
 		UnityEngine.Color32[] colors = sourceTexture.GetPixels32 ();
+
 		BufferStack.Push (colors);
-		//isOK = true;
 	}
 
-    public int Width {
+	public override int Width {
         get {
+			if(fullScreen)
+				width=(int)size.width;
             return width;
         }
-        set {
+        protected set {
             width = value;
             isValid ();
         }
     }
     
-    public int Height {
+	public override int Height {
         get {
+			if(fullScreen)
+				height=(int)size.height;
             return height;
         }
-        set {
-            height = value;
+		protected set {
+			height = value;
             isValid ();
         }
     }
-    
-    public Texture2D SourceTexture {
-        get {
-            return sourceTexture;
-        }
-    }
+   
     void isValid ()
     {
         if (width > Screen.width || height > Screen.height) {

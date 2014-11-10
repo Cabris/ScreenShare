@@ -34,17 +34,19 @@ public class EncoderH264
 	UnityEngine.Color32[] colors;
 	bool debug=false;
 	
-	public EncoderH264 (ConcurrentStack<UnityEngine.Color32[]>  buffer,UnityEngine.Texture2D sourceTexture,bool isDebug)
+	public EncoderH264 (ConcurrentStack<UnityEngine.Color32[]>  buffer,int srcW,int srcH,bool isDebug)
 	{
         debug=isDebug;
 		this.sourceBuffer=buffer;
-		srcW=sourceTexture.width;
-		srcH=sourceTexture.height;
+		this.srcW=srcW;
+		this.srcH=srcH;
 		obj=this;
 	}
 	FileStream fs;
 	public void Prepare(){
-		colors=null;
+		colors=new UnityEngine.Color32[srcW*srcH];
+		for(int i=0;i<srcW*srcH;i++)
+			colors[i]=UnityEngine.Color.green;
 		if(debug){
 			string path = @"MyTest_h264.mp4";
 			fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Write);
@@ -139,10 +141,11 @@ public class EncoderH264
 		{
 			for (int x = 0; x < srcW; x++)
 			{
-				UnityEngine.Color32 color=colors[pixelIndex++];
+				UnityEngine.Color32 color=colors[pixelIndex];//////
 				src[index++] = color.b; // B
 				src[index++] = color.g; // G
 				src[index++] = color.r; // R
+				pixelIndex++;
 			}
 		}
 		

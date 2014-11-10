@@ -6,7 +6,7 @@ using System;
 public class EncodeCamera : MonoBehaviour {
 
 	[SerializeField]
-	CameraSource source;
+	ImageSource source;
 	[SerializeField]
 	int outWidth,outHeight;
 	[SerializeField]
@@ -36,12 +36,13 @@ public class EncodeCamera : MonoBehaviour {
 			outWidth=source.Width;
 			outHeight=source.Height;
 		}
-		encoder=new EncoderH264(source.BufferStack ,source.SourceTexture,true);
+		encoder=new EncoderH264(source.BufferStack ,source.Width,source.Height,true);
 		encoder.OutWidth=outWidth;
 		encoder.OutHeight=outHeight;
 		encoder.Fps=fps;
 		encoder.BitRate=bitRate;
 		encoder.Prepare();
+
 		server=GetComponent<StreamTcpServer>();
 		obj=this;
 
@@ -67,8 +68,10 @@ public class EncodeCamera : MonoBehaviour {
 		Debug.Log("Encoding");
 	}
 	
-	void startEncoding(){
+	public void startEncoding(){
 		source.StartCapture();
+
+
 		encoder.StartEncoder();
 		timer.Start();
 		isEncoding=true;
@@ -87,7 +90,7 @@ public class EncodeCamera : MonoBehaviour {
 		blocking--;
 	}
 	
-	void stopEncoding(){
+	public void stopEncoding(){
 		source.StopCapture();
 		isEncoding=false;
 		timer.Stop();

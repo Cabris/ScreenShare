@@ -12,6 +12,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400004}
+  - 114: {fileID: 11400016}
   m_Layer: 8
   m_Name: OVRCameraController
   m_TagString: MainCamera
@@ -29,9 +30,9 @@ GameObject:
   - 4: {fileID: 400002}
   - 20: {fileID: 2000000}
   - 124: {fileID: 12400000}
-  - 81: {fileID: 8100000}
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400008}
+  - 114: {fileID: 11400018}
   m_Layer: 8
   m_Name: CameraRight
   m_TagString: Untagged
@@ -83,6 +84,7 @@ GameObject:
   - 124: {fileID: 12400002}
   - 114: {fileID: 11400014}
   - 114: {fileID: 11400012}
+  - 114: {fileID: 11400020}
   m_Layer: 8
   m_Name: CameraLeft
   m_TagString: Untagged
@@ -204,7 +206,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: dab337169ab34004eb205bbb096a6e4e, type: 2}
+  m_TargetTexture: {fileID: 0}
   m_HDR: 0
   m_OcclusionCulling: 1
 --- !u!20 &2000002
@@ -233,7 +235,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 24f7c9d148e926c4381129cd59756bc2, type: 2}
+  m_TargetTexture: {fileID: 0}
   m_HDR: 0
   m_OcclusionCulling: 1
 --- !u!20 &2000004
@@ -265,13 +267,6 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
   m_OcclusionCulling: 1
---- !u!81 &8100000
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
 --- !u!108 &10800000
 Light:
   m_ObjectHideFlags: 1
@@ -406,12 +401,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bb40312629680c40bd84375478990c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 0}
+  source: {fileID: 11400016}
   outWidth: 800
   outHeight: 480
   isSameAsSource: 1
   fps: 60
-  bitRate: 800000
+  bitRate: 2000000
   isEncoding: 0
   blocking: 0
 --- !u!114 &11400008
@@ -476,6 +471,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NeckPosition: {x: 0, y: .600000024, z: 0}
   EyePosition: {x: 0, y: .150000006, z: .0900000036}
+--- !u!114 &11400016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dce2ad784b711a2439fe1a1e872db7a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sources:
+  - {fileID: 11400020}
+  - {fileID: 11400018}
+--- !u!114 &11400018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aabcd91738bea2438abe5da8b17364b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fps: 60
+  width: 0
+  height: 0
+  fullScreen: 1
+  stackSize: 0
+--- !u!114 &11400020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aabcd91738bea2438abe5da8b17364b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fps: 60
+  width: 0
+  height: 0
+  fullScreen: 1
+  stackSize: 0
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
