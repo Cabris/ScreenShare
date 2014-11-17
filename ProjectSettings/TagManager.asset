@@ -7,6 +7,14 @@ TagManager:
   - CoreDontDestroyOnLoad
   - GPSSimulator
   - 
+  - SpaceScene_Nebula
+  - SpaceScene_Planet
+  - SpaceScene_LocalStar
+  - SpaceScene_PlanetRings
+  - SpaceScene_Moon
+  - SpaceScene_Galaxy
+  - SpaceScene_Camera
+  - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
   Builtin Layer 2: Ignore Raycast
@@ -16,7 +24,7 @@ TagManager:
   Builtin Layer 6: 
   Builtin Layer 7: 
   User Layer 8: tempLayer
-  User Layer 9: 
+  User Layer 9: DeepSpace
   User Layer 10: 
   User Layer 11: 
   User Layer 12: 

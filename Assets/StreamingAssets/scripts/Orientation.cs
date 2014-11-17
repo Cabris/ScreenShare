@@ -28,7 +28,7 @@ public class Orientation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F2))
         {
             Rectify();
         }
@@ -42,7 +42,7 @@ public class Orientation : MonoBehaviour
         Quaternion inv = Quaternion.Inverse(childRotation);
         Quaternion fix = inv;
         Quaternion lr = fix;
-        orientationFixer.localRotation = lr;
+        //orientationFixer.localRotation = lr;
         isRectified = true;
     }
     
