@@ -37,7 +37,7 @@ public class StreamTcpServer : MonoBehaviour {
 		for (int i = 0; i < IpA.Length; i++) 
 		{ 
 			string s= String.Format("IP Address {0}: {1} ", i, IpA[i].ToString ());
-			//Debug.Log(s);
+			Debug.Log(s);
 		}
 
 		while (true){
