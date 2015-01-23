@@ -1,0 +1,396 @@
+﻿j
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   Assets/SpaceUnity/Materials/Asteroids/Asteroid-001-PlainDark.mat
+#	modified:   Assets/SpaceUnity/Materials/Asteroids/Asteroid-002-AlternativeDark.mat
+#	modified:   Assets/SpaceUnity/Materials/Asteroids/Asteroid-003-Black.mat
+#	modified:   Assets/SpaceUnity/Materials/Asteroids/Asteroid-004-BrightCraters.mat
+#	modified:   Assets/SpaceUnity/Materials/Asteroids/Asteroid-005-PreciousElements.mat
+#	modified:   Assets/SpaceUnity/Materials/Asteroids/Asteroid-006-BlueSteel.mat
+#	modified:   Assets/SpaceUnity/Materials/Atmospheres/Atmosphere-Blue-Medium.mat
+#	modified:   Assets/SpaceUnity/Materials/Atmospheres/Atmosphere-Blue-Thick.mat
+#	modified:   Assets/SpaceUnity/Materials/Atmospheres/Atmosphere-Blue-Thin.mat
+#	modified:   Assets/SpaceUnity/Materials/Atmospheres/Atmosphere-Brown-Medium.mat
+#	modified:   Assets/SpaceUnity/Materials/Atmospheres/Atmosphere-Brown-Thick.mat
+#	modified:   Assets/SpaceUnity/Materials/Atmospheres/Atmosphere-Brown-Thin.mat
+#	modified:   Assets/SpaceUnity/Materials/Atmospheres/Atmosphere-Cyan-Medium.mat
+#	modified:   Assets/SpaceUnity/Materials/Atmospheres/Atmosphere-Cyan-Thick.mat
+#	modified:   Assets/SpaceUnity/Materials/Atmospheres/Atmosphere-Cyan-Thin.mat
+#	modified:   Assets/SpaceUnity/Materials/Atmospheres/Atmosphere-Green-Medium.mat
+#	modified:   Assets/SpaceUnity/Materials/Atmospheres/Atmosphere-Green-Thick.mat
+#	modified:   Assets/SpaceUnity/Materials/Atmospheres/Atmosphere-Green-Thin.mat
+#	modified:   Assets/SpaceUnity/Materials/Atmospheres/Atmosphere-Orange-Medium.mat
+#	modified:   Assets/SpaceUnity/Materials/Atmospheres/Atmosphere-Orange-Thick.mat
+#	modified:   Assets/SpaceUnity/Materials/Atmospheres/Atmosphere-Orange-Thin.mat
+#	modified:   Assets/SpaceUnity/Materials/Atmospheres/Atmosphere-Purple-Medium.mat
+#	modified:   Assets/SpaceUnity/Materials/Atmospheres/Atmosphere-Purple-Thick.mat
+#	modified:   Assets/SpaceUnity/Materials/Atmospheres/Atmosphere-Purple-Thin.mat
+#	modified:   Assets/SpaceUnity/Materials/Atmospheres/Atmosphere-Red-Medium.mat
+#	modified:   Assets/SpaceUnity/Materials/Atmospheres/Atmosphere-Red-Thick.mat
+#	modified:   Assets/SpaceUnity/Materials/Atmospheres/Atmosphere-Red-Thin.mat
+#	modified:   Assets/SpaceUnity/Materials/Galaxies/Flares/GalaxyFlare.flare
+#	modified:   Assets/SpaceUnity/Materials/Galaxies/Galaxy-001.mat
+#	modified:   Assets/SpaceUnity/Materials/Galaxies/Galaxy-002.mat
+#	modified:   Assets/SpaceUnity/Materials/Galaxies/Galaxy-003.mat
+#	modified:   Assets/SpaceUnity/Materials/Galaxies/Galaxy-004.mat
+#	modified:   Assets/SpaceUnity/Materials/Galaxies/Galaxy-005.mat
+#	modified:   Assets/SpaceUnity/Materials/Galaxies/Galaxy-006.mat
+#	modified:   Assets/SpaceUnity/Materials/Galaxies/Galaxy-007.mat
+#	modified:   Assets/SpaceUnity/Materials/Galaxies/Galaxy-008.mat
+#	modified:   Assets/SpaceUnity/Materials/Galaxies/Galaxy-009.mat
+#	modified:   Assets/SpaceUnity/Materials/Galaxies/Galaxy-010.mat
+#	modified:   Assets/SpaceUnity/Materials/Galaxies/Galaxy-011.mat
+#	modified:   Assets/SpaceUnity/Materials/Galaxies/Galaxy-012.mat
+#	modified:   Assets/SpaceUnity/Materials/Galaxies/Galaxy-013.mat
+#	modified:   Assets/SpaceUnity/Materials/Galaxies/Galaxy-014.mat
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Body/LocalStarBody-Blue-001.mat
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Body/LocalStarBody-Blue-002.mat
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Body/LocalStarBody-Orange-001.mat
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Body/LocalStarBody-Orange-002.mat
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Body/LocalStarBody-Red-001.mat
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Body/LocalStarBody-Red-002.mat
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Body/LocalStarBody-Yellow-001.mat
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Body/LocalStarBody-Yellow-002.mat
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Disc/LocalStarDisc.mat
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Flare/LocalStarFlare-Blue-Large.flare
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Flare/LocalStarFlare-Blue-Medium.flare
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Flare/LocalStarFlare-Blue-Small.flare
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Flare/LocalStarFlare-Orange-Large.flare
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Flare/LocalStarFlare-Orange-Medium.flare
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Flare/LocalStarFlare-Orange-Small.flare
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Flare/LocalStarFlare-Red-Large.flare
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Flare/LocalStarFlare-Red-Medium.flare
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Flare/LocalStarFlare-Red-Small.flare
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Flare/LocalStarFlare-Yellow-Large.flare
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Flare/LocalStarFlare-Yellow-Medium.flare
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Flare/LocalStarFlare-Yellow-Small.flare
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Prominence/LocalStarProminence-Blue-001.mat
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Prominence/LocalStarProminence-Orange-001.mat
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Prominence/LocalStarProminence-Red-001.mat
+#	modified:   Assets/SpaceUnity/Materials/LocalStars/Prominence/LocalStarProminence-Yellow-001.mat
+#	modified:   Assets/SpaceUnity/Materials/Moons/Moon-001.mat
+#	modified:   Assets/SpaceUnity/Materials/Moons/Moon-002.mat
+#	modified:   Assets/SpaceUnity/Materials/Moons/Moon-003.mat
+#	modified:   Assets/SpaceUnity/Materials/Moons/Moon-004.mat
+#	modified:   Assets/SpaceUnity/Materials/Moons/Moon-005.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-001-CloudyBlue-Bright-01.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-001-CloudyBlue-Bright-02.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-001-CloudyBlue-Dark-01.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-001-CloudyBlue-Dark-02.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-001-CloudyBlue-Medium-01.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-001-CloudyBlue-Medium-02.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-001-CloudyBlue-Medium-03.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-001-CloudyBlue-VeryBright-01.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-001-CloudyBlue-VeryDark-01.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-001-CloudyBlueGreen-Bright-01.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-001-CloudyBlueGreen-Bright-02.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-001-CloudyBlueGreen-Dark-01.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-001-CloudyBlueGreen-Dark-02.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-001-CloudyBlueGreen-Medium-01.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-001-CloudyBlueGreen-Medium-02.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-001-CloudyBlueGreen-Medium-03.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-001-CloudyBlueGreen-VeryBright-01.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-001-CloudyBlueGreen-VeryDark-01.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-002-Bright-01-CloudyBlueYellow.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-002-Bright-02-CloudyBlueYellow.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-002-Dark-01-CloudyBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-002-Dark-02-CloudyBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-002-Dark-03-CloudyBlueYellow.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-002-Medium-01-CloudyBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-002-Medium-02-CloudyBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-002-Medium-03-CloudyBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-002-Medium-04-CloudyBlueYellow.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-003-Bright-01-DarkMatterRed.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-003-Bright-02-DarkMatterRed.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-003-Bright-03-DarkMatterRedBluePink.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-003-Bright-04-DarkMatterRed.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-003-Bright-05-DarkMatterRedPinkBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-003-Medium-01-DarkMatterRed.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-003-Medium-02-DarkMatterRed.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-003-Medium-03-DarkMatterRed.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-003-Medium-04-DarkMatterRed.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-004-Bright-01-DarkMatterOrange.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-004-Bright-02-DarkMatterOrange.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-004-Dark-01-DarkMatterOrange.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-004-Dark-02-DarkMatterOrange.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-004-Dark-03-DarkMatterOrange.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-004-Medium-01-DarkMatterOrange.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-004-Medium-02-DarkMatterOrange.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-004-Medium-03-DarkMatterOrange.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-004-Medium-04-DarkMatterOrangeBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-005-Bright-01-DarkMatter-BluePurplePink.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-005-Bright-02-DarkMatter-BluePurplePink.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-005-Bright-03-DarkMatter-PurplePink.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-005-Dark-01-DarkMatter-BluePurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-005-Dark-02-DarkMatter-BluePurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-005-Medium-01-DarkMatter-BluePurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-005-Medium-02-DarkMatter-Purple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-005-Medium-03-DarkMatter-Purple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-005-VeryDark-01-DarkMatter-BluePurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-006-Bright-01-StreakyBluePurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-006-Bright-01-StreakyPink.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-006-Dark-01-GlitteryBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-006-Dark-01-GlitteryPink.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-006-Dark-02-GlitteryBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-006-Dark-02-GlitteryPink.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-006-Dark-03-GlitteryBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-006-Dark-03-GlitteryPink.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-006-Medium-01-GlitteryBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-006-Medium-01-GlitteryPink.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-006-Medium-02-GlitteryStreakyBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-006-Medium-02-GlitteryStreakyPink.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-006-Medium-03-StreakyBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-006-Medium-03-StreakyPink.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-006-Medium-04-GlitteryBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-006-Medium-04-GlitteryPink.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-006-VeryBright-01-GlitteryBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-006-VeryBright-01-GlitteryPink.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-007-Bright-01-DarkMatterGlitteryPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-007-Dark-01-DarkMatterPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-007-Dark-02-DarkMatterGlitteryPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-007-Medium-01-DarkMatterGlitteryPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-007-Medium-02-DarkMatterGlitteryPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-007-Medium-03-DarkMatterStreakyPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-007-Medium-04-DarkMatterStreakyPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-007-Medium-05-DarkMatterPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-007-Medium-06-DarkMatterPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-008-Bright-01-DarkMatterBlueOrange.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-008-Dark-01-DarkMatterBlueOrange.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-008-Dark-02-DarkMatterBlueOrange.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-008-Medium-01-DarkMatterBlueOrange.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-008-VeryBright-01-DarkMatterBlueOrange.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-008-VeryDark-01-DarkMatterBlueOrange.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-008-VeryDark-02-DarkMatterGreenOrange.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-009-Bright-01-CloudyDarkMatterPinkPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-009-Bright-02-CloudyDarkMatterGlitteryPinkPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-009-Bright-02-CloudyDarkMatterPinkPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-009-Bright-03-CloudyDarkMatterPinkPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-009-Dark-01-CloudyDarkMatterPinkPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-009-Dark-02-CloudyDarkMatterPinkPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-009-Medium-01-CloudyDarkMatterPinkPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-009-Medium-02-CloudyDarkMatterGlitteryPinkPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-009-Medium-03-CloudyDarkMatterPinkPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-009-VeryDark-01-CloudyDarkMatterPinkPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-009-VeryDark-02-CloudyDarkMatterPinkPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-009-VeryDark-03-CloudyDarkMatterPinkPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Bright-01-CloudyDarkMatterBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Bright-01-CloudyDarkMatterGreen.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Bright-01-CloudyDarkMatterPink.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Bright-01-CloudyDarkMatterRed.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Bright-02-CloudyDarkMatterBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Bright-02-CloudyDarkMatterGreen.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Bright-02-CloudyDarkMatterPink.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Bright-02-CloudyDarkMatterRed.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Bright-03-CloudyDarkMatterBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Bright-03-CloudyDarkMatterGreen.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Bright-03-CloudyDarkMatterPink.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Dark-01-CloudyDarkMatterBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Medium-01-CloudyDarkMatterBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Medium-01-CloudyDarkMatterGreen.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Medium-01-CloudyDarkMatterOrange.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Medium-01-CloudyDarkMatterPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Medium-02-CloudyDarkMatterBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Medium-02-CloudyDarkMatterGreen.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Medium-02-CloudyDarkMatterOrange.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Medium-02-CloudyDarkMatterPurple.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Medium-03-CloudyDarkMatterGreen.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-Medium-03-CloudyDarkMatterPink.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-VeryDark-01-CloudyDarkMatterBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-VeryDark-01-CloudyDarkMatterGreen.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-VeryDark-01-CloudyDarkMatterOrange.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-VeryDark-01-CloudyDarkMatterPink.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-VeryDark-01-CloudyDarkMatterRed.mat
+#	modified:   Assets/SpaceUnity/Materials/Nebulas/Nebula-010-VeryDark-02-CloudyDarkMatterBlue.mat
+#	modified:   Assets/SpaceUnity/Materials/Particles/SpaceFog.mat
+#	modified:   Assets/SpaceUnity/Materials/Planets/Planet-Alien-AshyGreen.mat
+#	modified:   Assets/SpaceUnity/Materials/Planets/Planet-Alien-PurpleDust.mat
+#	modified:   Assets/SpaceUnity/Materials/Planets/Planet-Desert-DevoidOfLife.mat
+#	modified:   Assets/SpaceUnity/Materials/Planets/Planet-Desert-OrangeWithImpacts.mat
+#	modified:   Assets/SpaceUnity/Materials/Planets/Planet-Earth.mat
+#	modified:   Assets/SpaceUnity/Materials/Planets/Planet-EarthLike-OrangeTundra.mat
+#	modified:   Assets/SpaceUnity/Materials/Planets/Planet-Gas-JupitersCousin.mat
+#	modified:   Assets/SpaceUnity/Materials/Planets/Planet-Gas-PlainBrown.mat
+#	modified:   Assets/SpaceUnity/Materials/Planets/Planet-Ice-FrozenTundras.mat
+#	modified:   Assets/SpaceUnity/Materials/Planets/Planet-Ice-WinterWorld.mat
+#	modified:   Assets/SpaceUnity/Materials/Planets/Planet-Molten-SeaOfFire.mat
+#	modified:   Assets/SpaceUnity/Materials/Planets/Planet-Molten-Volcanica.mat
+#	modified:   Assets/SpaceUnity/Materials/Rings/Rings-001.mat
+#	modified:   Assets/SpaceUnity/Materials/Rings/Rings-002.mat
+#	modified:   Assets/SpaceUnity/Materials/Rings/Rings-003.mat
+#	modified:   Assets/SpaceUnity/Materials/Rings/Rings-004.mat
+#	modified:   Assets/SpaceUnity/Materials/Rings/Rings-005.mat
+#	modified:   Assets/SpaceUnity/Materials/Rings/Rings-006.mat
+#	modified:   Assets/SpaceUnity/Materials/Rings/Rings-007.mat
+#	modified:   Assets/SpaceUnity/Materials/Rings/Rings-008.mat
+#	modified:   Assets/SpaceUnity/Materials/Rings/Rings-009.mat
+#	modified:   Assets/SpaceUnity/Materials/Rings/Rings-010.mat
+#	modified:   Assets/SpaceUnity/Materials/Rings/Rings-011.mat
+#	modified:   Assets/SpaceUnity/Materials/Rings/Rings-012.mat
+#	modified:   Assets/SpaceUnity/Materials/Rings/Rings-013.mat
+#	modified:   Assets/SpaceUnity/Materials/Rings/Rings-014.mat
+#	modified:   Assets/SpaceUnity/Materials/Rings/Rings-015.mat
+#	modified:   Assets/SpaceUnity/Materials/Rings/Rings-016.mat
+#	modified:   Assets/SpaceUnity/Materials/Rings/Rings-017.mat
+#	modified:   Assets/SpaceUnity/Materials/Rings/Rings-018.mat
+#	modified:   Assets/SpaceUnity/Materials/Rings/Rings-019.mat
+#	modified:   Assets/SpaceUnity/Materials/Rings/Rings-020.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-001-Blue.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-001-Cyan.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-001-Gray.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-001-Green.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-001-Orange.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-001-Purple.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-001-Red.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-001.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-002-Blue.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-002-Cyan.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-002-Gray.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-002-Green.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-002-Orange.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-002-Purple.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-002-Red.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-002.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-003-Blue.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-003-Cyan.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-003-Gray.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-003-Green.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-003-Orange.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-003-Purple.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-003-Red.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-003.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-004-Blue.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-004-Cyan.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-004-Gray.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-004-Green.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-004-Orange.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-004-Purple.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-004-Red.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-004.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-005-Blue.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-005-Cyan.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-005-Gray.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-005-Green.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-005-Orange.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-005-Purple.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-005-Red.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-005.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-006-Blue.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-006-Cyan.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-006-Gray.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-006-Green.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-006-Orange.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-006-Purple.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-006-Red.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-006.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-007-Blue.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-007-Cyan.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-007-Gray.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-007-Green.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-007-Orange.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-007-Purple.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-007-Red.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-007.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-008-Blue.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-008-Cyan.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-008-Gray.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-008-Green.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-008-Orange.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-008-Purple.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-008-Red.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-008.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-009-Blue.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-009-Cyan.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-009-Gray.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-009-Green.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-009-Orange.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-009-Purple.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-009-Red.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-009.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-010-Blue.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-010-Cyan.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-010-Gray.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-010-Green.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-010-Orange.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-010-Purple.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-010-Red.mat
+#	modified:   Assets/SpaceUnity/Materials/Stars/Stars-010.mat
+#	modified:   Assets/SpaceUnity/Prefabs/CameraEffects/SpaceFog.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/CameraEffects/SpaceParticles.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/Objects/Asteroid-001.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/Objects/Asteroid-002.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/Objects/Asteroid-003.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/Objects/AsteroidField.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/Galaxy.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/LocalStarLarge.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/LocalStarMedium.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/LocalStarSmall.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/MoonHighPoly.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/MoonLowPoly.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/MoonMediumPoly.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/Nebula.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/PlanetHighPoly.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/PlanetLowPoly.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/PlanetMediumPoly.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/PlanetRingsNarrowHighPoly.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/PlanetRingsNarrowLowPoly.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/PlanetRingsNarrowMediumPoly.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/PlanetRingsNormalHighPoly.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/PlanetRingsNormalLowPoly.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/PlanetRingsNormalMediumPoly.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/PlanetRingsWideHighPoly.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/PlanetRingsWideLowPoly.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/PlanetRingsWideMediumPoly.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/SpaceCamera.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/SpaceSceneElements/SpaceScene.prefab
+#	modified:   Assets/SpaceUnity/Prefabs/Tools/SpaceSceneSwitcher.prefab
+#	modified:   Assets/SpaceUnity/_Demo/Materials/Explosion/Fire.mat
+#	modified:   Assets/SpaceUnity/_Demo/Materials/Explosion/Shockwave.mat
+#	modified:   Assets/SpaceUnity/_Demo/Materials/Explosion/Smoke.mat
+#	modified:   Assets/SpaceUnity/_Demo/Materials/LaserShot/LaserShot.mat
+#	modified:   Assets/SpaceUnity/_Demo/Materials/Spaceship/Engines.mat
+#	modified:   Assets/SpaceUnity/_Demo/Materials/Spaceship/Spaceship.mat
+#	modified:   Assets/SpaceUnity/_Demo/Materials/Thrusters/ThrusterFlame.mat
+#	modified:   Assets/SpaceUnity/_Demo/Prefabs/Explosion.prefab
+#	modified:   Assets/SpaceUnity/_Demo/Prefabs/LaserImpact.prefab
+#	modified:   Assets/SpaceUnity/_Demo/Prefabs/LaserShot.prefab
+#	modified:   Assets/SpaceUnity/_Demo/Prefabs/SpaceScene1.prefab
+#	modified:   Assets/SpaceUnity/_Demo/Prefabs/SpaceScene2.prefab
+#	modified:   Assets/SpaceUnity/_Demo/Prefabs/Spaceship.prefab
+#	modified:   Assets/SpaceUnity/_Demo/Prefabs/Thruster.prefab
+#	modified:   Assets/SpaceUnity/_Scenes/Demo - Camera Chasemode.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Demo - Camera Spectatormode.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Demo - Colorized Blue.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Demo - Colorized Red.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Demo - Earth.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Demo - Endless Asteroids.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Demo - Local Asteroids Big.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Demo - Local Asteroids Small.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Demo - Maxed Out.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Demo - Mirror Dog Fight.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Demo - Planet Climates.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Demo - Planet Rings.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Demo - Space Scene Switcher.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Demo - Squadron of Seven.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Demo - Squadron of Three.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Sample Scenes/Sample Scene 0.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Sample Scenes/Sample Scene 1.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Sample Scenes/Sample Scene 10.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Sample Scenes/Sample Scene 11.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Sample Scenes/Sample Scene 12.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Sample Scenes/Sample Scene 13.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Sample Scenes/Sample Scene 2.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Sample Scenes/Sample Scene 3.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Sample Scenes/Sample Scene 4.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Sample Scenes/Sample Scene 5.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Sample Scenes/Sample Scene 6.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Sample Scenes/Sample Scene 7.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Sample Scenes/Sample Scene 8.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Sample Scenes/Sample Scene 9.unity
+#	modified:   Assets/SpaceUnity/_Scenes/Template.unity
+#	new file:   rucgq0jy.dyw.txt
+#
+
